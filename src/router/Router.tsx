@@ -8,12 +8,13 @@ import {
   RegisterParticipantPage,
   UsersPage,
 } from "../pages/admin";
-import { LandingPage } from "../pages/frontend";
+import { LandingPage, LoginPage } from "../pages/frontend";
 
 export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/home" element={<HomePage />}>
         <Route path="participants" element={<ParticipantsPage />} />
         <Route path="conference" element={<MeetingsPage />} />

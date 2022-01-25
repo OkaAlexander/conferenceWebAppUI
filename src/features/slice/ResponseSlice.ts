@@ -12,7 +12,11 @@ import AddConferenceThunk from "./../../functions/thunks/AddConferenceThunk";
 const ResponseReducer = createSlice({
   name: "ResponseReducer",
   initialState: responseState,
-  reducers: {},
+  reducers: {
+    ResponseFail: (state, action) => {
+      state.error = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(GetParticipantsThunk.pending, (state) => {
@@ -109,4 +113,4 @@ const ResponseReducer = createSlice({
 });
 
 export default ResponseReducer.reducer;
-export const {} = ResponseReducer.actions;
+export const { ResponseFail } = ResponseReducer.actions;
