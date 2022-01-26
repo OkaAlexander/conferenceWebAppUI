@@ -10,6 +10,7 @@ import {
   AppBar,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import { FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { SpinnerLoader } from "../../components";
@@ -163,13 +164,18 @@ export default function LoginPage() {
           </Box>
           <Box className={classes.form_group}>
             <Box className={classes.input_group}>
-              <input className={classes.input} placeholder="username" />
+              <input
+                className={classes.input}
+                placeholder="username"
+                onChange={(e) => setForm({ ...form, username: e.target.value })}
+              />
             </Box>
             <Box className={classes.input_group}>
               <input
                 className={classes.input}
                 placeholder="password"
                 type="password"
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </Box>
             <Box>
@@ -178,6 +184,7 @@ export default function LoginPage() {
                 size="small"
                 className={classes.button}
                 color="primary"
+                onClick={HandleLogin}
               >
                 Login
               </Button>
@@ -188,12 +195,12 @@ export default function LoginPage() {
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
-                  width: "100%",
                   textAlign: "center",
                   alignSelf: "center",
                   flex: 1,
+                  marginTop: 5,
                 }}
-                variant="body1"
+                variant="caption"
                 component="caption"
                 color="error"
               >

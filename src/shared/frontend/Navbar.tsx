@@ -1,6 +1,8 @@
 import { AppBar, Box, makeStyles, Toolbar } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import { Menu, Navigation } from "@material-ui/icons";
 import React from "react";
+import { FaUserPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { colors } from "../../constants/colors";
 import { INavbar } from "../../interface/IShared";
 import { resources } from "../../resources/resources";
@@ -26,6 +28,7 @@ const styles = makeStyles(
 );
 export default function Navbar({ sidebar, menu, handleMenu }: INavbar) {
   const classes = styles();
+  const navigation = useNavigate();
   return (
     <AppBar
       style={{ paddingLeft: sidebar ? 240 : 0, height: 60 }}
@@ -40,10 +43,38 @@ export default function Navbar({ sidebar, menu, handleMenu }: INavbar) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexDirection: "row",
           }}
         >
-          <Box className={classes.image_container}>
-            <img className="img" src={resources.Logo} alt="logo" />
+          <Box
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Box className={classes.image_container}>
+              <img className="img" src={resources.Logo} alt="logo" />
+            </Box>
+          </Box>
+          <Box
+            style={{
+              alignSelf: "center",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <FaUserPlus
+              onClick={() => navigation("/login")}
+              style={{ cursor: "pointer" }}
+              color="#fff"
+              size={24}
+            />
           </Box>
         </Box>
         {menu && !sidebar && (
