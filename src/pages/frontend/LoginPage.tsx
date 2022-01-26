@@ -146,7 +146,7 @@ export default function LoginPage() {
   }
   useEffect(() => {
     user && navigation("/home");
-  }, []);
+  }, [user]);
   return (
     <div className={classes.root}>
       <SpinnerLoader open={loading} />
