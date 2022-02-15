@@ -18,6 +18,7 @@ export default function Input({
   label,
   type,
   change,
+  value,
 }: IInput) {
   const classes = styles();
   return (
@@ -31,6 +32,7 @@ export default function Input({
       fullWidth={full}
       label={label}
       onChange={change}
+      value={value}
     />
   );
 }

@@ -4,6 +4,8 @@ import {
   IUsersSlice,
   IParticipantsSlice,
   IResponseSlice,
+  IGuestSlice,
+  IMemberSlice,
 } from "./../interface/ISlice";
 
 export const userState: IUserSlice = {
@@ -25,4 +27,12 @@ export const responseState: IResponseSlice = {
 
 export const participantState: IParticipantsSlice = {
   participants: [],
+};
+
+export const guetsState: IGuestSlice = {
+  guest: [],
+};
+
+export const memberState: IMemberSlice = {
+  info: null,
 };

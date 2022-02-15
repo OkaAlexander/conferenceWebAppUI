@@ -8,6 +8,7 @@ const styles = makeStyles(
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      overflowX: "hidden",
     },
     header: {
       display: "flex",
@@ -43,6 +44,13 @@ const styles = makeStyles(
       margin: theme.spacing(2, 0),
       borderRadius: 0,
       width: "100%",
+    },
+    cat_counter: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      margin: theme.spacing(0, 1),
     },
   }),
   { index: 1 }

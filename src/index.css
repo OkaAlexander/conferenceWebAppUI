@@ -13,6 +13,7 @@ body {
   justify-content: flex-start;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 @font-face {
   /* font-family: "Hidayatullah"; */
@@ -71,4 +72,31 @@ code {
   100% {
     transform: rotate(1800deg);
   }
+}
+
+.guest_container {
+  border-radius: 0px;
+  /* background: linear-gradient(145deg, #f0f0f0, #cacaca); */
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 14px 14px 59px #acacac, -14px -14px 59px #ffffff;
+}
+
+.guest_image_container {
+  /* border-radius: 50%;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 5px 5px 10px #acacac, -5px -5px 10px #ffffff; */
+  border-radius: 144px;
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow: 5px 5px 10px #9f9f9f, -5px -5px 10px #ffffff;
+  padding: 10px;
+  border: 2px solid white;
+}
+
+.guest_info_box {
+  border-radius: 0px;
+  background: linear-gradient(145deg, #f0f0f0, #fefefe);
+  box-shadow: 5px 5px 10px #8d8d8d, -5px -5px 10px #ffffff;
+  /* border-radius: 0px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 5px 5px 8px #e6e6e6, -5px -5px 8px #ffffff; */
 }

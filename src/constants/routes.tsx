@@ -1,6 +1,7 @@
 import { IRoute } from "./../interface/IRoute";
 import {
   FaNetworkWired,
+  FaUserAstronaut,
   FaUserGraduate,
   FaUserPlus,
   FaUsers,
@@ -19,9 +20,14 @@ export const AdminRoutes: IRoute[] = [
     icon: <FaUserGraduate />,
   },
   {
-    title: "Conference",
+    title: "Event",
     route: "conference",
     icon: <FaNetworkWired />,
+  },
+  {
+    title: "Guest",
+    route: "guest",
+    icon: <FaUserAstronaut />,
   },
   { title: "Users", route: "users", icon: <FaUsers /> },
   { title: "Profile", route: "profile", icon: <FaUserTie /> },

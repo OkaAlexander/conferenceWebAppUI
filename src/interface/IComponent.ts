@@ -17,4 +17,5 @@ export interface IInput {
   required?: boolean;
   change?: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: any;
+  value?: any;
 }

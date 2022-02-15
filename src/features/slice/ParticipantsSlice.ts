@@ -7,9 +7,13 @@ const ParticipantsReducer = createSlice({
   initialState: participantState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(GetParticipantsThunk.fulfilled, (state, action) => {
-      state.participants = action.payload;
-    });
+    builder
+      .addCase(GetParticipantsThunk.fulfilled, (state, action) => {
+        state.participants = action.payload;
+      })
+      .addCase(AddParticipantThunk.fulfilled, (state, action) => {
+        state.participants = action.payload;
+      });
   },
 });
 

@@ -1,7 +1,7 @@
 import { AppBar, Box, makeStyles, Toolbar } from "@material-ui/core";
 import { Menu, Navigation } from "@material-ui/icons";
 import React from "react";
-import { FaUserPlus } from "react-icons/fa";
+import { FaHome, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { colors } from "../../constants/colors";
 import { INavbar } from "../../interface/IShared";
@@ -17,6 +17,8 @@ const styles = makeStyles(
     },
     appbar: {
       background: colors.logo_brown,
+      width: "100%",
+      padding: theme.spacing(0, 2),
     },
     image_container: {
       height: 40,
@@ -26,7 +28,13 @@ const styles = makeStyles(
   }),
   { index: 1 }
 );
-export default function Navbar({ sidebar, menu, handleMenu }: INavbar) {
+export default function Navbar({
+  sidebar,
+  menu,
+  handleMenu,
+  user,
+  home,
+}: INavbar) {
   const classes = styles();
   const navigation = useNavigate();
   return (
@@ -60,22 +68,42 @@ export default function Navbar({ sidebar, menu, handleMenu }: INavbar) {
               <img className="img" src={resources.Logo} alt="logo" />
             </Box>
           </Box>
-          <Box
-            style={{
-              alignSelf: "center",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <FaUserPlus
-              onClick={() => navigation("/login")}
-              style={{ cursor: "pointer" }}
-              color="#fff"
-              size={24}
-            />
-          </Box>
+          {home && (
+            <Box
+              style={{
+                alignSelf: "center",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FaHome
+                onClick={() => navigation("/")}
+                style={{ cursor: "pointer" }}
+                color="#fff"
+                size={24}
+              />
+            </Box>
+          )}
+          {user && (
+            <Box
+              style={{
+                alignSelf: "center",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FaUserPlus
+                onClick={() => navigation("/login")}
+                style={{ cursor: "pointer" }}
+                color="#fff"
+                size={24}
+              />
+            </Box>
+          )}
         </Box>
         {menu && !sidebar && (
           <Menu onClick={handleMenu} style={{ alignSelf: "center" }} />

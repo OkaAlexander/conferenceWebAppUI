@@ -1,13 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { responseState } from "../../data/state";
 import {
+  AddConferenceMemberThunk,
+  AddGuestThunk,
   AddParticipantThunk,
+  GetGuestThunk,
   GetParticipantsThunk,
   RegisterUserThunk,
   UserLoginThunk,
+  UserLogoutThunk,
 } from "../../functions";
 import GetConferencesThunk from "./../../functions/thunks/GetConferencesThunk";
 import AddConferenceThunk from "./../../functions/thunks/AddConferenceThunk";
+import { LoginThunk, UpdateInfoThunk } from "../../functions/member";
 
 const ResponseReducer = createSlice({
   name: "ResponseReducer",
@@ -69,10 +74,10 @@ const ResponseReducer = createSlice({
         state.error = null;
         state.message = null;
       })
-      .addCase(AddParticipantThunk.fulfilled, (state, action) => {
+      .addCase(AddParticipantThunk.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
-        state.message = action.payload;
+        state.message = "Participant Added Successfully";
       })
       .addCase(AddParticipantThunk.rejected, (state, action) => {
         state.loading = false;
@@ -105,6 +110,95 @@ const ResponseReducer = createSlice({
         state.message = action.payload;
       })
       .addCase(RegisterUserThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+        state.message = null;
+      })
+      .addCase(UserLogoutThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(UserLogoutThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(UserLogoutThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+        state.message = null;
+      })
+      .addCase(AddConferenceMemberThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(AddConferenceMemberThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.message = "Registration Successfull";
+      })
+      .addCase(AddConferenceMemberThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+        state.message = null;
+      })
+      .addCase(AddGuestThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(AddGuestThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(AddGuestThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+        state.message = null;
+      })
+      .addCase(GetGuestThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(GetGuestThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(GetGuestThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+        state.message = null;
+      })
+      .addCase(UpdateInfoThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(UpdateInfoThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.message = action.payload;
+      })
+      .addCase(UpdateInfoThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+        state.message = null;
+      })
+      .addCase(LoginThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(LoginThunk.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(LoginThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
         state.message = null;

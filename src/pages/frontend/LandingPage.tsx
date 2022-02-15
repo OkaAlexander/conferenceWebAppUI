@@ -3,6 +3,7 @@ import {
   makeStyles,
   Typography,
   Paper,
+  Grid,
   Container,
   Button,
 } from "@material-ui/core";
@@ -10,11 +11,12 @@ import React, { useEffect } from "react";
 import { colors } from "../../constants/colors";
 import { resources } from "../../resources/resources";
 import { Zoom } from "react-awesome-reveal";
-import { Navbar } from "../../shared";
+import { MeetingGuest, Navbar } from "../../shared";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./../../app/hooks";
-import { GetConferencesThunk } from "../../functions";
-import { FaCalendarAlt, FaClock } from "react-icons/fa";
+import { GetConferencesThunk, GetGuestThunk } from "../../functions";
+import { FaCalendarAlt, FaHome } from "react-icons/fa";
+import { Footer } from "../../views";
 
 const styles = makeStyles(
   (theme) => ({
@@ -153,6 +155,19 @@ const styles = makeStyles(
         margin: theme.spacing(1, 0),
       },
     },
+    guest: {},
+
+    guest_info_container: {
+      width: "25%",
+      alignSelf: "center",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: theme.spacing(2),
+      [theme.breakpoints.down("sm")]: {
+        width: "70%",
+      },
+    },
   }),
   { index: 1 }
 );
@@ -160,17 +175,20 @@ export default function LandingPage() {
   const classes = styles();
   const dispatch = useAppDispatch();
   const { conferences } = useAppSelector((state) => state.ConferencesReducer);
+  const { guest } = useAppSelector((state) => state.GuestReducer);
   const navigation = useNavigate();
+  const { user } = useAppSelector((state) => state.UserReducer);
 
   //
   useEffect(() => {
     dispatch(GetConferencesThunk());
+    dispatch(GetGuestThunk());
   }, []);
 
   function GetActiveConference() {
-    let conf = conferences.find((con) => con.status === 0);
+    let conf = conferences.filter((con) => con.status === 0);
     if (conf) {
-      return conf;
+      return conf[conf.length - 1];
     } else {
       return conferences[conferences.length - 1];
     }
@@ -179,13 +197,17 @@ export default function LandingPage() {
     <Box
       className={classes.root}
       style={{
-        backgroundImage: `linear-gradient(180deg,rgba(0,0,0,0.15),rgba(0,0,0,0.3),rgba(0,0,0,0.45)),url(${resources.Bg3})`,
+        backgroundImage: `linear-gradient(180deg,rgba(255,255,255,0.4),rgba(255,255,255,0.6),rgba(255,255,255,0.8)),url(${resources.Bg3})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        height: "100vh",
+        width: "100vw",
+        backgroundAttachment: "fixed",
       }}
     >
-      <Navbar />
+      <Navbar user={Boolean(!user)} />
+
       <Zoom duration={750} delay={100} className={classes.zoom}>
         <Box component={Paper} className={classes.top_container}>
           {GetActiveConference() ? (
@@ -209,8 +231,27 @@ export default function LandingPage() {
       </Zoom>
       <Box
         component={Paper}
-        className={`${classes.meeting_moment_container} ${classes.meeting_details_container}`}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          background: colors.logo_brown,
+          marginTop: 20,
+          padding: 10,
+        }}
       >
+        <Box className={classes.time_container}>
+          <FaHome size={25} color="#fff" />
+          <Typography
+            style={{ color: "#fff", fontSize: 20, fontFamily: "georgia" }}
+            variant="h5"
+            component="strong"
+          >
+            {GetActiveConference()
+              ? GetActiveConference().venue.toString()
+              : "-------"}
+          </Typography>
+        </Box>
         <Box className={classes.date_container}>
           <FaCalendarAlt size={25} color="#fff" />
           <Typography
@@ -218,44 +259,94 @@ export default function LandingPage() {
             variant="h5"
             component="strong"
           >
-            {GetActiveConference() ? GetActiveConference().date : "-------"}
-          </Typography>
-        </Box>
-        <Box className={classes.time_container}>
-          <FaClock size={25} color="#fff" />
-          <Typography
-            style={{ color: "#fff", fontSize: 20, fontFamily: "georgia" }}
-            variant="h5"
-            component="strong"
-          >
             {GetActiveConference()
-              ? GetActiveConference().time.toString()
+              ? `${GetActiveConference().start_date} - ${
+                  GetActiveConference().end_date
+                }`
               : "-------"}
           </Typography>
         </Box>
       </Box>
-      <Container className={classes.content_container}>
-        {GetActiveConference() && (
-          <Box className={classes.meeting_details_container}>
-            <Typography
-              style={{ fontFamily: "Georgia", fontSize: 18 }}
-              className={classes.body_text}
-              variant="body1"
-            >
-              {GetActiveConference()?.description}
-            </Typography>
-            <Button
-              className={classes.join_button}
-              variant="contained"
-              size="small"
-              color="primary"
-              onClick={() => navigation("/home")}
-            >
-              Join Session
-            </Button>
-          </Box>
-        )}
+      <Container>
+        <Box
+          style={{
+            padding: 10,
+            borderRadius: 5,
+            width: "100%",
+            background: "rgba(0,0,0,0.65)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "20px 0",
+          }}
+        >
+          <Typography
+            variant="body1"
+            style={{
+              width: "100%",
+              flex: 1,
+              color: "#fff",
+              textAlign: "center",
+              padding: 10,
+            }}
+            component="caption"
+          >
+            {GetActiveConference()
+              ? `${GetActiveConference().description}`
+              : "-------"}
+          </Typography>
+        </Box>
       </Container>
+      <Container>
+        <Box
+          style={{
+            padding: 10,
+            width: "100%",
+            background: "transparent",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "20px 0",
+          }}
+        >
+          <Button
+            variant="contained"
+            size="small"
+            className={classes.join_button}
+            color="primary"
+            onClick={() => navigation("/uenr-conference/participant/register")}
+          >
+            Register Now
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            className={classes.join_button}
+            color="primary"
+            style={{ background: "steelblue" }}
+            onClick={() => navigation("/uenr-conference/member/login")}
+          >
+            Sign In
+          </Button>
+        </Box>
+      </Container>
+
+      <Grid
+        container
+        style={{
+          background: "transparent",
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {guest.length > 0 &&
+          guest.map((g) => <MeetingGuest key={g.id} info={g} />)}
+      </Grid>
+
+      <Footer />
     </Box>
   );
 }

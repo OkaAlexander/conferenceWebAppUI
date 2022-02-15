@@ -27,7 +27,12 @@ export default function HomePage() {
   }, [user]);
   return (
     <div className={classes.root}>
-      <Navbar sidebar={open} handleMenu={() => setOpen(true)} menu={true} />
+      <Navbar
+        user={false}
+        sidebar={open}
+        handleMenu={() => setOpen(true)}
+        menu={true}
+      />
       <SidebarView
         base="/home/"
         handleClose={() => setOpen(false)}

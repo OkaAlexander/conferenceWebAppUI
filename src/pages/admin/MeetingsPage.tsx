@@ -20,6 +20,7 @@ import { colors } from "../../constants/colors";
 import { conferenceTableHeaderData } from "../../data/table";
 import { GetConferencesThunk } from "../../functions";
 import { resources } from "../../resources/resources";
+import { Navbar } from "../../shared";
 import { ConferenceForm, Modal } from "../../views";
 
 const styles = makeStyles(
@@ -77,7 +78,7 @@ export default function MeetingsPage() {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.ResponseReducer);
   const { conferences } = useAppSelector((state) => state.ConferencesReducer);
-
+  const { user } = useAppSelector((state) => state.UserReducer);
   useEffect(() => {
     dispatch(GetConferencesThunk());
   }, []);
@@ -135,7 +136,9 @@ export default function MeetingsPage() {
                     {conference.title}
                   </TableCell>
                   <TableCell>{conference.venue}</TableCell>
-                  <TableCell>{conference.date}</TableCell>
+                  <TableCell>
+                    {conference.start_date} - {conference.end_date}
+                  </TableCell>
                   <TableCell>
                     {conference.status === 0 ? "Active" : "Completed"}
                   </TableCell>

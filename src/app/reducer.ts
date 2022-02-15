@@ -4,6 +4,8 @@ import {
   ResponseReducer,
   ParticipantsReducer,
   ConferencesReducer,
+  GuestReducer,
+  MemberReducer,
 } from "../features";
 
 const reducer = combineReducers({
@@ -11,6 +13,8 @@ const reducer = combineReducers({
   ResponseReducer,
   ConferencesReducer,
   ParticipantsReducer,
+  GuestReducer,
+  MemberReducer,
 });
 
 export default reducer;

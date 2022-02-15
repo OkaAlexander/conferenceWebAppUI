@@ -5,23 +5,24 @@ export interface IParticipant {
   email: string;
   organization: string;
   position: string;
-  hotel: string;
-  room: string;
-  special_need: string;
-  remark: string;
+  disabled: number;
+  disability: string;
+  diet: string;
+  location: string;
   picture: string;
   gender: string;
   conference_id: string;
+  accomodation: number;
 }
 
 export interface IProgram {
   title: string;
-  date: string;
+  end_date: string;
   venue: string;
   id: string;
   description: string;
   status: number;
-  time: string;
+  start_date: string;
 }
 
 export interface IAuth {
@@ -36,4 +37,12 @@ export interface IUser {
   password: string;
   id: string;
   name: string;
+}
+
+export interface IGuestInfo {
+  role: string;
+  portfolio: string;
+  name: string;
+  id: string;
+  picture: string;
 }

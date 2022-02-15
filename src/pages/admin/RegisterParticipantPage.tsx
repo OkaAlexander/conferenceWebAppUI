@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { Input, SpinnerLoader } from "../../components";
 import DropDown from "./../../components/frontend/DropDown";
-import { GenderData } from "./../../data/form";
+import { DisabilityData, GenderData } from "./../../data/form";
 import { resources } from "./../../resources/resources";
 import { colors } from "../../constants/colors";
 import { Zoom } from "react-awesome-reveal";
@@ -81,6 +81,34 @@ const styles = makeStyles(
       width: "100%",
       margin: theme.spacing(0.5, 0),
     },
+    input_group: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      width: "100%",
+      margin: theme.spacing(0.5, 0),
+      [theme.breakpoints.down("sm")]: {
+        display: "flex",
+        flexDirection: "column",
+      },
+      padding: 0,
+    },
+    diet: {
+      width: "100%",
+      marginRight: theme.spacing(0.5),
+      [theme.breakpoints.down("sm")]: {
+        width: "100%",
+        margin: theme.spacing(0.5, 0),
+      },
+    },
+    diet1: {
+      width: "100%",
+      marginLeft: theme.spacing(0.5),
+      [theme.breakpoints.down("sm")]: {
+        width: "100%",
+        margin: theme.spacing(0.5, 0),
+      },
+    },
   }),
   { index: 1 }
 );
@@ -100,15 +128,16 @@ export default function RegisterParticipantPage() {
     phone: "",
     email: "",
     gender: "",
-    hotel: "",
-    room: "",
+    diet: "",
+    location: "",
     organization: "",
     position: "",
-    special_need: "",
-    remark: "",
+    disabled: 0,
+    disability: "",
     conference_id: "",
     id: "",
     picture: "",
+    accomodation: 0,
   });
 
   useEffect(() => {
@@ -143,14 +172,15 @@ export default function RegisterParticipantPage() {
     formdata.append("name", form.name);
     formdata.append("email", form.email);
     formdata.append("phone", form.phone);
-    formdata.append("hotel", form.hotel);
-    formdata.append("room", form.room);
+    formdata.append("disabled", form.disabled.toString());
+    formdata.append("disability", form.disability);
     formdata.append("position", form.position);
     formdata.append("gender", form.gender);
-    formdata.append("special_need", form.special_need);
+    formdata.append("diet", form.diet);
     formdata.append("organization", form.organization);
-    formdata.append("remark", form.remark);
+    formdata.append("location", form.location);
     formdata.append("conference_id", form.conference_id);
+    formdata.append("accomodation", form.accomodation.toString());
     dispatch(AddParticipantThunk(formdata));
   }
   return (
@@ -202,27 +232,57 @@ export default function RegisterParticipantPage() {
                 }
                 label="Position / Rank"
               />
-              <Input
-                change={(e) =>
-                  setForm({ ...form, hotel: e.target.value.toUpperCase() })
-                }
-                label="Hotel Name"
-              />
+              <Box className={classes.input_group}>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  className={`${classes.diet} ${classes.input}`}
+                  label="Preferred Diet"
+                  fullWidth
+                  onChange={(e) =>
+                    setForm({ ...form, diet: e.target.value.toString() })
+                  }
+                />
+                <TextField
+                  className={classes.input}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      disabled: parseInt(e.target.value.toString()),
+                    })
+                  }
+                  label="Disabled"
+                  variant="outlined"
+                  select
+                  size="small"
+                >
+                  {DisabilityData.map((dis) => (
+                    <MenuItem value={dis.value} key={dis.value}>
+                      {dis.title}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Box>
             </Box>
           </Zoom>
           <Zoom duration={750} delay={200} style={{ width: "100%" }}>
             <Box className={classes.input_container}>
+              {form.disabled === 1 && (
+                <Input
+                  label="Disability"
+                  change={(e) =>
+                    setForm({
+                      ...form,
+                      disability: e.target.value.toUpperCase(),
+                    })
+                  }
+                />
+              )}
               <Input
-                label="Room Number"
                 change={(e) =>
-                  setForm({ ...form, room: e.target.value.toUpperCase() })
+                  setForm({ ...form, location: e.target.value.toUpperCase() })
                 }
-              />
-              <Input
-                change={(e) =>
-                  setForm({ ...form, position: e.target.value.toUpperCase() })
-                }
-                label="Remarks"
+                label="City / Town"
               />
               {/* <Input
                 change={(e) =>
@@ -233,22 +293,47 @@ export default function RegisterParticipantPage() {
                 }
                 label="Special Need"
               /> */}
-              <TextField
-                className={classes.input}
-                variant="outlined"
-                size="small"
-                label="Conference"
-                select
-              >
-                <MenuItem value="">
-                  <small>None</small>
-                </MenuItem>
-                {conferences.map((conf) => (
-                  <MenuItem key={conf.id} value={conf.id}>
-                    {conf.title}
-                  </MenuItem>
-                ))}
-              </TextField>
+              <Box className={classes.input_group}>
+                {conferences.length > 0 && (
+                  <TextField
+                    className={classes.input}
+                    variant="outlined"
+                    size="small"
+                    label="Conference"
+                    select
+                    onChange={(e) =>
+                      setForm({ ...form, conference_id: e.target.value })
+                    }
+                  >
+                    <MenuItem
+                      key={conferences[conferences.length - 1].id}
+                      value={conferences[conferences.length - 1].id}
+                    >
+                      {conferences[conferences.length - 1].title}
+                    </MenuItem>
+                  </TextField>
+                )}
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  className={`${classes.diet1} ${classes.input}`}
+                  label="Do you require Accomodation?"
+                  fullWidth
+                  select
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      accomodation: parseInt(e.target.value.toString()),
+                    })
+                  }
+                >
+                  {DisabilityData.map((ac) => (
+                    <MenuItem value={ac.value} key={ac.value.toString()}>
+                      {ac.title}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Box>
               <Box className={classes.form_container}>
                 <Box style={{ justifyContent: "flex-start" }}>
                   <Box style={{ width: 200, height: 180 }} component={Paper}>

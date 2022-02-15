@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import {
+  GuestPage,
   HomePage,
   MeetingsPage,
   ParticipantsPage,
@@ -8,14 +9,21 @@ import {
   RegisterParticipantPage,
   UsersPage,
 } from "../pages/admin";
-import { LandingPage, LoginPage } from "../pages/frontend";
+import { LandingPage, LoginPage, MemberRegistration } from "../pages/frontend";
+import { ParticipantHomePage, ParticipantLogin } from "../pages/participant";
+import DashboardPage from "../pages/participant/DashboardPage";
 
 export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/uenr-conference/participant/register"
+        element={<MemberRegistration />}
+      />
       <Route path="/home" element={<HomePage />}>
+        <Route path="guest" element={<GuestPage />} />
         <Route path="participants" element={<ParticipantsPage />} />
         <Route path="conference" element={<MeetingsPage />} />
         <Route path="users" element={<UsersPage />} />
@@ -25,6 +33,13 @@ export default function Router() {
           element={<RegisterParticipantPage />}
         />
       </Route>
+      <Route path="uenr-conference/member" element={<ParticipantHomePage />}>
+        <Route path="info" element={<DashboardPage />} />
+      </Route>
+      <Route
+        path="uenr-conference/member/login"
+        element={<ParticipantLogin />}
+      />
     </Routes>
   );
 }
