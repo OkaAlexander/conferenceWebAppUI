@@ -3,7 +3,14 @@ import {
   Box,
   Divider,
   Grid,
+  IconButton,
   Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
@@ -18,7 +25,7 @@ import { GetConferencesThunk, GetParticipantsThunk } from "../../functions";
 import { ICsvRows } from "../../interface/IServices";
 import { ExportServices } from "../../services";
 import { resources } from "../../resources/resources";
-import { FaUsers } from "react-icons/fa";
+import { FaIdCard, FaUsers } from "react-icons/fa";
 import { IParticipant } from "../../interface/IModel";
 export default function ParticipantsPage() {
   const classes = participants_styles();
@@ -35,11 +42,7 @@ export default function ParticipantsPage() {
   var totalParticipant = 0;
 
   participants.forEach((element) => {
-    if (element.gender === "MALE") {
-      totalMale += 1;
-    } else {
-      totalFemale += 1;
-    }
+    element.gender === "MALE" ? (totalMale += 1) : (totalFemale += 1);
   });
   useEffect(() => {
     dispatch(GetParticipantsThunk());
@@ -73,10 +76,11 @@ export default function ParticipantsPage() {
 
   return (
     <Box className={classes.root}>
-      {showModal && (
+      <SpinnerLoader open={loading} />;
+      {Boolean(selectedParticipant) && (
         <ConferenceIdModal
           info={selectedParticipant}
-          handleClose={() => setShowModal(false)}
+          handleClose={() => setSelectedParticipant(null)}
         />
       )}
       <SpinnerLoader open={loading} />
@@ -138,7 +142,92 @@ export default function ParticipantsPage() {
         </Box>
       </Box>
       <Divider orientation="horizontal" />
-      <Grid
+      <TableContainer
+        style={{ paddingBottom: 100, height: "100%" }}
+        component={Paper}
+        elevation={0}
+      >
+        <Table
+          style={{ height: "100%", overflowY: "auto", paddingBottom: 100 }}
+        >
+          <TableHead
+            style={{
+              position: "sticky",
+              top: 0,
+              zIndex: 1,
+              background: "#fff",
+            }}
+          >
+            <TableRow>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+                width="30%"
+              >
+                Name
+              </TableCell>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+              >
+                Phone
+              </TableCell>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+              >
+                Email
+              </TableCell>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+              >
+                Gender
+              </TableCell>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+              >
+                City/Town
+              </TableCell>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+              >
+                Participant_ID
+              </TableCell>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+              >
+                Card
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {participants.length > 0 &&
+              participants.map((part) => (
+                <TableRow key={part.id}>
+                  <TableCell align="left">{part.name}</TableCell>
+                  <TableCell align="left">{part.phone}</TableCell>
+                  <TableCell align="left">{part.email}</TableCell>
+                  <TableCell align="left">{part.gender}</TableCell>
+                  <TableCell align="left">{part.location}</TableCell>
+                  <TableCell align="left">{part.id}</TableCell>
+                  <TableCell align="left">
+                    <IconButton
+                      onClick={() => setSelectedParticipant(part)}
+                      size="small"
+                    >
+                      <FaIdCard />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {/* <Grid
         style={{
           justifyContent: "flex-start",
           alignItems: "center",
@@ -159,7 +248,7 @@ export default function ParticipantsPage() {
             key={part.id}
           />
         ))}
-      </Grid>
+      </Grid> */}
     </Box>
   );
 }

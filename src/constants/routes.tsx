@@ -1,5 +1,6 @@
 import { IRoute } from "./../interface/IRoute";
 import {
+  FaIdCard,
   FaNetworkWired,
   FaUserAstronaut,
   FaUserGraduate,
@@ -31,4 +32,5 @@ export const AdminRoutes: IRoute[] = [
   },
   { title: "Users", route: "users", icon: <FaUsers /> },
   { title: "Profile", route: "profile", icon: <FaUserTie /> },
+  { title: "Cards", route: "tags", icon: <FaIdCard /> },
 ];

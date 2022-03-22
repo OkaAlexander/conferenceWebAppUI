@@ -6,3 +6,4 @@ export { default as SpinnerLoader } from "./frontend/SpinnerLoader";
 export { default as ParticipantCard } from "./frontend/ParticipantCard";
 export { default as ConferenceIdModal } from "./frontend/ConferenceIdModal";
 export { default as ConferenceInfoCard } from "./frontend/ConferenceInfoCard";
+export {default as MemberCard} from './frontend/MemberCard'

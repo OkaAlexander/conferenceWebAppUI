@@ -46,3 +46,10 @@ export interface IGuestInfo {
   id: string;
   picture: string;
 }
+
+export interface IPrintValues{
+  total:number;
+count:number;
+value:number;
+start_at:number;
+}

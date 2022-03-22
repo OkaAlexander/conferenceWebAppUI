@@ -5,6 +5,7 @@ import {
   HomePage,
   MeetingsPage,
   ParticipantsPage,
+  PrintCardsPage,
   ProfilePage,
   RegisterParticipantPage,
   UsersPage,
@@ -32,6 +33,7 @@ export default function Router() {
           path="participant/register"
           element={<RegisterParticipantPage />}
         />
+        <Route path="tags" element={<PrintCardsPage />} />
       </Route>
       <Route path="uenr-conference/member" element={<ParticipantHomePage />}>
         <Route path="info" element={<DashboardPage />} />

@@ -6,6 +6,7 @@ import {
   IResponseSlice,
   IGuestSlice,
   IMemberSlice,
+  IPrintSlice
 } from "./../interface/ISlice";
 
 export const userState: IUserSlice = {
@@ -36,3 +37,12 @@ export const guetsState: IGuestSlice = {
 export const memberState: IMemberSlice = {
   info: null,
 };
+
+export const printReducerState:IPrintSlice={
+values:{
+  total:0,
+  count:4,
+  value:4,
+  start_at:0
+}
+}
