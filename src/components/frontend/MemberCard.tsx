@@ -148,6 +148,9 @@ export default function MemberCard({ info }: Props) {
         <Box className={classes.top_container}>
           <Box className={classes.image_container}>
             <img src={baseUrl + info?.picture} alt="U" className="img" />
+            {/* <object data={baseUrl + info?.picture}>
+              <img src={resources.uenrlogo}></img>
+            </object> */}
           </Box>
         </Box>
         <Box className={classes.info_container}>

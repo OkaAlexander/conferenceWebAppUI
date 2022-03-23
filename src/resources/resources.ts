@@ -10,6 +10,7 @@ import DrawerHeader from "../assets/header1.jpg";
 import Passport from "../assets/avatar.jpeg";
 import OkaPassport from "../assets/oka_passport.png";
 import PartCardLogo from "../assets/part_card_logo.png";
+import uenrlogo from "../assets/uenrLogo.png";
 export const resources = {
   Meeting,
   Logo,
@@ -23,4 +24,5 @@ export const resources = {
   group_avator,
   OkaPassport,
   PartCardLogo,
+  uenrlogo,
 };
