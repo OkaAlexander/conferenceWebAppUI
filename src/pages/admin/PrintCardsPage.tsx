@@ -1,5 +1,6 @@
 import {
   Box,
+  Container,
   Grid,
   IconButton,
   makeStyles,
@@ -12,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { MemberCard, SpinnerLoader } from "../../components";
 import { GetParticipantsThunk } from "../../functions";
 import ReactPrint from "react-to-print";
-import { IParticipant } from "../../interface/IModel";
+import { IParticipant, IPrintValues } from "../../interface/IModel";
 import { setValues } from "../../features/slice/PrintSlice";
 import {
   formatValues,
@@ -57,14 +58,21 @@ const styles = makeStyles(
       flex: 1,
     },
     content: {
-      width: "100%",
       height: "100%",
-      padding: theme.spacing(2),
-      paddingBottom: theme.spacing(4),
+      width: "100%",
+      overflowY: "auto",
+      padding: theme.spacing(1),
+      paddingBottom: 100,
+      justifyContent: "center",
+      alignItems: "center",
     },
     grid: {
+      width: "100%",
+      padding: theme.spacing(1),
+      height: "inherit",
       alignItems: "center",
       justifyContent: "center",
+      display: "flex",
     },
   }),
   { index: 1 }
@@ -76,59 +84,62 @@ export default function PrintCardsPage() {
   const dispatch = useAppDispatch();
   const paperRef = useRef(null);
   const { values } = useAppSelector((state) => state.PrintReducer);
-  const [Participants, setParticipants] = useState<IParticipant[]>([]);
-
+  const [Content, setContent] = useState<IParticipant[]>([]);
   useEffect(() => {
     dispatch(GetParticipantsThunk());
   }, []);
 
   useEffect(() => {
-    dispatch(setValues(InitValues({ ...values, total: participants.length })));
+    dispatch(
+      setValues(
+        InitValues(
+          { ...values, total: participants.length },
+          participants.length
+        )
+      )
+    );
   }, []);
 
   useEffect(() => {
-    // const parts: IParticipant[] = [];
-    // for (let i = values.value; i < values.value + values.count; i++) {
-    //   parts.push(participants[i]);
-    // }
-    // setParticipants(parts);
-    console.log(values);
-  }, [values.value]);
-
-  useEffect(() => {
-    dispatch(setValues(InitValues({ ...values, total: participants.length })));
+    dispatch(
+      setValues(
+        InitValues(
+          { ...values, total: participants.length },
+          participants.length
+        )
+      )
+    );
   }, [participants]);
 
   function HandleLeft() {
-    dispatch(setValues(handleDecrement(values)));
+    dispatch(setValues(handleDecrement(values, participants.length)));
   }
 
-  function HandleRefresh() {
-    dispatch(
-      setValues({
-        count: 4,
-        total: participants.length,
-        value: values.count,
-        start_at: values.value,
-      })
-    );
-  }
+  function HandleRefresh() {}
   function HandleRight() {
-    dispatch(setValues(handleIncrement(values)));
+    dispatch(setValues(handleIncrement(values, participants.length)));
   }
+
+  useEffect(() => {
+    const con: IParticipant[] = [];
+    for (let i = values.start; i < values.end; i++) {
+      con.push(participants[i]);
+    }
+    setContent(con);
+  }, [values]);
   return (
     <div className={classes.root}>
       <SpinnerLoader open={loading} />
       <Paper className={classes.header}>
         <Box className={classes.header_content}>
           <Typography className={classes.text} variant="body1">
-            {values.value}
+            {values.start}
           </Typography>
           <Typography className={classes.text} variant="body2">
             of
           </Typography>
           <Typography className={classes.text} variant="body1">
-            {values.total}
+            {values.end}
           </Typography>
           <IconButton
             onClick={HandleLeft}
@@ -138,7 +149,7 @@ export default function PrintCardsPage() {
             <ChevronLeft />
           </IconButton>
           <Typography className={classes.text} variant="body1">
-            {values.total - values.value}
+            {values.total - values.end}
           </Typography>
           <IconButton
             onClick={HandleRight}
@@ -170,10 +181,9 @@ export default function PrintCardsPage() {
       </Paper>
       <Box className={classes.content}>
         <Grid className={classes.grid} innerRef={paperRef} container>
-          {participants.length > 0 &&
-            participants.map((info) => (
-              <MemberCard info={info} key={info.id} />
-            ))}
+          {Content.map((info) => (
+            <MemberCard info={info} key={info.id} />
+          ))}
         </Grid>
       </Box>
     </div>

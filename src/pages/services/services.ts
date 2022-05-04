@@ -1,47 +1,68 @@
-import { IPrintValues } from "../../interface/IModel";
+import { IParticipant, IPrintValues } from "../../interface/IModel";
 
-
-
-export function formatValues(values:IPrintValues){
-    // console.log(values)
-    // console.log(values.value-values.count);
+export function formatValues(values: IPrintValues) {
+  // console.log(values)
+  // console.log(values.value-values.count);
 }
 
+export function PrepareResponseData_Participants(data: any[]): IParticipant[] {
+  const info: IParticipant[] = [];
+  for (let i = 0; i < data.length; i++) {
+    console.log(data[i]);
+    console.log(JSON.parse(data[i]));
+    info.push(JSON.parse(data[i]));
+  }
 
-export function InitValues(values:IPrintValues){
-    console.log(values)
-    return values
+  return info;
 }
 
-export function handleIncrement(values:IPrintValues){
-    if(values.total-values.value<values.count){
-        let count=values.total-values.value;
-        if(count===1){
-
-            return {...values,count:4,value:values.value+count,start_at:values.value}
-        }
-        else{
-
-            return {...values,count,value:values.value+count,start_at:values.value}
-        }
-    }
-    else{
-        let count=values.count;
-        return {...values,count,value:values.value+count,start_at:values.value}
-    }
+export function InitValues(values: IPrintValues, len: number): IPrintValues {
+  return {
+    ...values,
+    total: len,
+    start: values.start,
+    end: values.end === 0 ? (len > 4 ? 4 : len) : values.end,
+  };
 }
 
-export function handleDecrement(values:IPrintValues){
-    let rem=values.value-values.count
-    console.log(values)
-    if(rem>0){
-        if(rem>values.count){
-            return {...values,value:values.value-values.count,start_at:values.start_at-values.count}
-        }else{
-            let count=values.value-values.count;
-            return {...values,value:count,count:4,start_at:0}
-          
-        }
-    }
-   
+export function handleIncrement(
+  values: IPrintValues,
+  len: number
+): IPrintValues {
+  const data: IPrintValues = {
+    ...values,
+    total: len,
+    start:
+      values.end !== values.total ? values.start + values.count : values.start,
+    end:
+      values.end !== values.total
+        ? len - values.end > 4
+          ? values.end + values.count
+          : values.end + (len - values.end)
+        : values.end,
+  };
+  return data;
+}
+
+export function handleDecrement(
+  values: IPrintValues,
+  len: number
+): IPrintValues {
+  const data: IPrintValues = {
+    ...values,
+    total: len,
+    start:
+      values.end - values.start !== 0
+        ? values.start > values.count
+          ? values.start - values.count
+          : values.start - values.start
+        : values.start,
+    end:
+      values.end - values.start !== 0
+        ? values.end !== values.count
+          ? values.end - values.count
+          : values.end
+        : values.end,
+  };
+  return data;
 }

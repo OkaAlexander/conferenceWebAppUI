@@ -20,7 +20,6 @@ const styles = makeStyles(
       backdropFilter: "blur(5px)",
     },
     container: {
-      width: 300,
       height: 350,
       borderRadius: 0,
       padding: theme.spacing(0),
@@ -121,7 +120,13 @@ const styles = makeStyles(
       overflow: "hidden",
     },
     grid_item: {
-      margin: theme.spacing(1),
+      width: 300,
+      height: 350,
+      borderRadius: 0,
+      padding: theme.spacing(0),
+      overflow: "hidden",
+      alignSelf: "center",
+      margin: theme.spacing(0.5),
     },
   }),
   { index: 1 }
@@ -143,7 +148,7 @@ export default function MemberCard({ info }: Props) {
     return name;
   }
   return (
-    <Grid item className={classes.grid_item}>
+    <Grid component={Paper} item className={classes.grid_item}>
       <Paper ref={paperRef} className={classes.container}>
         <Box className={classes.top_container}>
           <Box className={classes.image_container}>

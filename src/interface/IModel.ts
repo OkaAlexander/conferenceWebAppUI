@@ -48,8 +48,9 @@ export interface IGuestInfo {
 }
 
 export interface IPrintValues{
-  total:number;
+total:number;
 count:number;
 value:number;
-start_at:number;
+start:number;
+end:number;
 }

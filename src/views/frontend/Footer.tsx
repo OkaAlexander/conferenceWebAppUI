@@ -60,7 +60,7 @@ export default function Footer() {
             variant="body2"
             component="caption"
           >
-            000 000 0000
+            0244854109 || 0543311515
           </Typography>
           <Typography
             style={{ color: "#fff" }}

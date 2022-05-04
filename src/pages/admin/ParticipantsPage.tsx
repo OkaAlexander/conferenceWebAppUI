@@ -1,9 +1,12 @@
 import {
   Avatar,
   Box,
+  Button,
+  colors,
   Divider,
   Grid,
   IconButton,
+  Modal,
   Paper,
   Table,
   TableBody,
@@ -18,7 +21,9 @@ import { participants_styles } from "../../styles/admin";
 import { useAppDispatch, useAppSelector } from "./../../app/hooks";
 import {
   ConferenceIdModal,
+  ConfirmModal,
   ParticipantCard,
+  ResponseDisplayCard,
   SpinnerLoader,
 } from "../../components";
 import { GetConferencesThunk, GetParticipantsThunk } from "../../functions";
@@ -27,20 +32,33 @@ import { ExportServices } from "../../services";
 import { resources } from "../../resources/resources";
 import { FaIdCard, FaUsers } from "react-icons/fa";
 import { IParticipant } from "../../interface/IModel";
+import CloseIcon from "@material-ui/icons/Close";
+import { RemoveMemberThunk } from "../../functions/member";
+import { ResetResponse } from "../../features/slice/ResponseSlice";
 export default function ParticipantsPage() {
   const classes = participants_styles();
   const dispatch = useAppDispatch();
   const { participants } = useAppSelector((state) => state.ParticipantsReducer);
   const { conferences } = useAppSelector((state) => state.ConferencesReducer);
-  const { loading } = useAppSelector((state) => state.ResponseReducer);
+  const { loading, message, error } = useAppSelector(
+    (state) => state.ResponseReducer
+  );
   const [Participants, setParticipants] = useState<ICsvRows[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [part, setPart] = useState<IParticipant | null>(null);
   const [selectedParticipant, setSelectedParticipant] =
     useState<IParticipant | null>(null);
   var totalMale = 0;
   var totalFemale = 0;
   var totalParticipant = 0;
 
+  /////
+  function HandleConfirmationModal(response: number) {
+    setShowModal(!showModal);
+    if (Boolean(response) && Boolean(part)) {
+      part && dispatch(RemoveMemberThunk(part));
+    }
+  }
   participants.forEach((element) => {
     element.gender === "MALE" ? (totalMale += 1) : (totalFemale += 1);
   });
@@ -76,7 +94,13 @@ export default function ParticipantsPage() {
 
   return (
     <Box className={classes.root}>
-      <SpinnerLoader open={loading} />;
+      <SpinnerLoader open={loading} />
+      <ConfirmModal
+        open={showModal}
+        handleModal={HandleConfirmationModal}
+        title="Delete Participant"
+        message="Do you want to delete this participant???"
+      />
       {Boolean(selectedParticipant) && (
         <ConferenceIdModal
           info={selectedParticipant}
@@ -125,7 +149,13 @@ export default function ParticipantsPage() {
             {(totalParticipant = totalFemale + totalMale)}
           </Typography>
         </Box>
-
+        <ResponseDisplayCard
+          error={error}
+          message={message}
+          handleClose={() => {
+            dispatch(ResetResponse());
+          }}
+        />
         <Box className={classes.header_right}>
           {Participants.length > 0 && (
             <ExportServices
@@ -133,12 +163,6 @@ export default function ParticipantsPage() {
               fileName="ParticipantsList"
             />
           )}
-          {/* <Box component={Button} className={classes.header_right_action}>
-            <FaFileCsv size={14} style={{ marginRight: 2, fontSize: 14 }} />
-            <Typography variant="caption" component="caption">
-              Export to Excel
-            </Typography>
-          </Box> */}
         </Box>
       </Box>
       <Divider orientation="horizontal" />
@@ -147,9 +171,7 @@ export default function ParticipantsPage() {
         component={Paper}
         elevation={0}
       >
-        <Table
-          style={{ height: "100%", overflowY: "auto", paddingBottom: 100 }}
-        >
+        <Table style={{ overflowY: "auto", paddingBottom: 100 }}>
           <TableHead
             style={{
               position: "sticky",
@@ -202,6 +224,12 @@ export default function ParticipantsPage() {
               >
                 Card
               </TableCell>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+              >
+                Delete
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -222,33 +250,26 @@ export default function ParticipantsPage() {
                       <FaIdCard />
                     </IconButton>
                   </TableCell>
+                  <TableCell>
+                    <IconButton
+                      onClick={() => {
+                        setPart(part);
+                        setShowModal(!showModal);
+                      }}
+                      style={{
+                        fontSize: 15,
+                        color: "#000",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      <CloseIcon color="error" />
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <Grid
-        style={{
-          justifyContent: "flex-start",
-          alignItems: "center",
-          width: "100%",
-          paddingBottom: 40,
-        }}
-        container
-        component={Paper}
-      >
-        {participants.map((part) => (
-          <ParticipantCard
-            handleCard={() => {
-              setSelectedParticipant(part);
-              setShowModal(true);
-            }}
-            conference_title={getConferenceTitle(part.conference_id)?.title}
-            info={part}
-            key={part.id}
-          />
-        ))}
-      </Grid> */}
     </Box>
   );
 }

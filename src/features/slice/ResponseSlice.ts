@@ -12,7 +12,11 @@ import {
 } from "../../functions";
 import GetConferencesThunk from "./../../functions/thunks/GetConferencesThunk";
 import AddConferenceThunk from "./../../functions/thunks/AddConferenceThunk";
-import { LoginThunk, UpdateInfoThunk } from "../../functions/member";
+import {
+  LoginThunk,
+  RemoveMemberThunk,
+  UpdateInfoThunk,
+} from "../../functions/member";
 
 const ResponseReducer = createSlice({
   name: "ResponseReducer",
@@ -20,6 +24,11 @@ const ResponseReducer = createSlice({
   reducers: {
     ResponseFail: (state, action) => {
       state.error = action.payload;
+    },
+    ResetResponse: (state) => {
+      state.loading = false;
+      state.error = null;
+      state.message = null;
     },
   },
   extraReducers: (builder) => {
@@ -202,9 +211,24 @@ const ResponseReducer = createSlice({
         state.loading = false;
         state.error = action.error.message;
         state.message = null;
+      })
+      .addCase(RemoveMemberThunk.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(RemoveMemberThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.message = action.payload.message;
+      })
+      .addCase(RemoveMemberThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+        state.message = null;
       });
   },
 });
 
 export default ResponseReducer.reducer;
-export const { ResponseFail } = ResponseReducer.actions;
+export const { ResponseFail, ResetResponse } = ResponseReducer.actions;

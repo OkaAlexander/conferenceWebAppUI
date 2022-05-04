@@ -8,8 +8,7 @@ const PrintReducer=createSlice({
     reducers:{
         setValues:(state,action)=>{
             state.values=action.payload;
-        },
-        
+        }, 
     }
 })
 
