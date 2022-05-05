@@ -77,12 +77,13 @@ export default function ParticipantsPage() {
       for (let i = 0; i < participants.length; i++) {
         let part = participants[i];
         FilteredParts.push({
-          Name: part.name,
+          Name: part.name.toUpperCase(),
           PhoneNumber: part.phone,
-          Email: part.email,
+          Email: part.email.toLowerCase(),
           Gender: part.gender,
-          Location: part.location,
-          SpecialDiet: part.diet,
+          Town_City: part.location.toUpperCase(),
+          Organization: part.organization.toUpperCase(),
+          SpecialDiet: part.diet.toUpperCase(),
           Disability: part.disabled === 0 ? "No" : "Yes",
           DisabledType: part.disability,
           AccommodationRequired: part.accomodation === 0 ? "No" : "Yes",
