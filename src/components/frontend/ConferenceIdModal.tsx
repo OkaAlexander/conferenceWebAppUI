@@ -19,21 +19,32 @@ const styles = makeStyles(
       backdropFilter: "blur(5px)",
     },
     container: {
-      width: 300,
-      height: 350,
+      height: 400,
       borderRadius: 0,
       padding: theme.spacing(0),
       overflow: "hidden",
     },
     top_container: {
-      background: colors.logo_brown,
+      // background: colors.logo_brown,
       padding: theme.spacing(1),
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       height: 200,
-      borderBottomRightRadius: "80%",
+      marginTop: 20,
+      // borderBottomRightRadius: "80%",
+    },
+    top_container1: {
+      backgroundColor: "#ffffff",
+      // padding: theme.spacing(1),
+      display: "flex",
+      // flexDirection: "column",
+      alignItems: "center",
+      // justifyContent: "center",
+      height: 50,
+
+      // borderBottomRightRadius: "80%",
     },
     info_container: {
       padding: theme.spacing(0),
@@ -80,9 +91,9 @@ const styles = makeStyles(
     },
     name: {
       fontFamily: "Bahnschrift",
-      fontWeight: "bold",
+      fontWeight: "bolder",
       textTransform: "uppercase",
-      fontSize: 13,
+      fontSize: 18,
       marginBottom: -2,
     },
     id_info: {
@@ -162,14 +173,32 @@ export default function ConferenceIdModal({ handleClose, info }: Props) {
         content={() => paperRef.current}
       />
       <Paper ref={paperRef} className={classes.container}>
-        <Box className={classes.top_container}>
-          <Box className={classes.image_container}>
+        <Box className={classes.top_container1}>
+          <img
+            src={resources.PartCardLogo}
+            alt="logo"
+            style={{
+              height: "180%",
+              width: "100%",
+            }}
+          />
+        </Box>
+        <Box
+          className={classes.top_container}
+          style={{
+            backgroundImage: `url(${resources.default_conf})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* <Box className={classes.image_container}>
             <img
               src={baseUrl + info?.picture}
               alt="participant-avatar"
               className="img"
             />
-          </Box>
+          </Box> */}
         </Box>
         <Box className={classes.info_container}>
           <Box className={classes.info_left}>
@@ -177,9 +206,9 @@ export default function ConferenceIdModal({ handleClose, info }: Props) {
               <Typography className={classes.name} variant="body1">
                 {info?.name}
               </Typography>
-              <Typography variant="caption" component="small">
+              {/* <Typography variant="caption" component="small">
                 Participant
-              </Typography>
+              </Typography> */}
             </Box>
             <Box
               style={{
@@ -194,16 +223,24 @@ export default function ConferenceIdModal({ handleClose, info }: Props) {
                 width: "100%",
               }}
             >
-              <Typography className={classes.id_info}>
-                ID: {info?.id}
+              <Typography
+                style={{
+                  marginBottom: 10,
+                  fontSize: 18,
+                  fontWeight: "bolder",
+                  color: colors.logo_brown,
+                  textTransform: "uppercase",
+                }}
+              >
+                UDS-TAMALE: VICE CHANCELLOR
               </Typography>
             </Box>
           </Box>
-          <Box className={classes.info_right}>
+          {/* <Box className={classes.info_right}>
             <Box className={classes.org_logo_container}>
               <img src={resources.PartCardLogo} alt="logo" className="img" />
             </Box>
-          </Box>
+          </Box> */}
         </Box>
       </Paper>
     </Box>

@@ -124,6 +124,11 @@ export default function HomePage() {
       <Paper className={classes.header}>
         <Box></Box>
         <Box>
+          <Typography style={{ color: "#038525" }}>
+            Your Registration is Successful...
+          </Typography>
+        </Box>
+        <Box>
           <Button
             onClick={() => setOpen(true)}
             variant="outlined"

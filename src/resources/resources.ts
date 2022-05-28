@@ -11,6 +11,8 @@ import Passport from "../assets/avatar.jpeg";
 import OkaPassport from "../assets/oka_passport.png";
 import PartCardLogo from "../assets/part_card_logo.png";
 import uenrlogo from "../assets/uenrLogo.png";
+import default_img from "../assets/default_img1.png";
+import default_conf from "../assets/default_conf.jpeg";
 export const resources = {
   Meeting,
   Logo,
@@ -25,4 +27,6 @@ export const resources = {
   OkaPassport,
   PartCardLogo,
   uenrlogo,
+  default_img,
+  default_conf,
 };

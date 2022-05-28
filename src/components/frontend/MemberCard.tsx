@@ -14,26 +14,39 @@ import { IParticipant } from "../../interface/IModel";
 import { resources } from "../../resources/resources";
 import { FcPrint } from "react-icons/fc";
 import ReactPrint from "react-to-print";
+import { url } from "inspector";
 const styles = makeStyles(
   (theme) => ({
     root: {
       backdropFilter: "blur(5px)",
     },
     container: {
-      height: 350,
+      height: 400,
       borderRadius: 0,
       padding: theme.spacing(0),
       overflow: "hidden",
     },
     top_container: {
-      background: colors.logo_brown,
+      // background: colors.logo_brown,
       padding: theme.spacing(1),
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       height: 200,
-      borderBottomRightRadius: "80%",
+      marginTop: 20,
+      // borderBottomRightRadius: "80%",
+    },
+    top_container1: {
+      backgroundColor: "#ffffff",
+      // padding: theme.spacing(1),
+      display: "flex",
+      // flexDirection: "column",
+      alignItems: "center",
+      // justifyContent: "center",
+      height: 50,
+
+      // borderBottomRightRadius: "80%",
     },
     info_container: {
       padding: theme.spacing(0),
@@ -67,22 +80,23 @@ const styles = makeStyles(
       paddingLeft: 100,
     },
     image_container: {
-      width: 150,
-      height: 150,
+      width: 160,
+      height: 160,
       borderRadius: "100%",
       overflow: "hidden",
     },
     org_logo_container: {
       height: 40,
+      paddingTop: 10,
     },
     name_role_container: {
       width: "100%",
     },
     name: {
       fontFamily: "Bahnschrift",
-      fontWeight: "bold",
+      fontWeight: "bolder",
       textTransform: "uppercase",
-      fontSize: 13,
+      fontSize: 18,
       marginBottom: -2,
     },
     id_info: {
@@ -121,7 +135,7 @@ const styles = makeStyles(
     },
     grid_item: {
       width: 300,
-      height: 350,
+      height: 400,
       borderRadius: 0,
       padding: theme.spacing(0),
       overflow: "hidden",
@@ -150,22 +164,43 @@ export default function MemberCard({ info }: Props) {
   return (
     <Grid component={Paper} item className={classes.grid_item}>
       <Paper ref={paperRef} className={classes.container}>
-        <Box className={classes.top_container}>
-          <Box className={classes.image_container}>
-            <img src={baseUrl + info?.picture} alt="U" className="img" />
-            {/* <object data={baseUrl + info?.picture}>
-              <img src={resources.uenrlogo}></img>
-            </object> */}
-          </Box>
+        <Box className={classes.top_container1}>
+          <img
+            src={resources.PartCardLogo}
+            alt="logo"
+            style={{
+              height: "180%",
+              width: "100%",
+            }}
+          />
+        </Box>
+        <Box
+          className={classes.top_container}
+          style={{
+            backgroundImage: `url(${resources.default_conf})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* <Box className={classes.image_container}>
+            <img
+              src={
+                Boolean(info.picture && info.picture.length > 0)
+                  ? baseUrl + info.picture
+                  : resources.default_img
+              }
+              alt="U"
+              className="img"
+            />
+             <img src={baseUrl + info?.picture} alt="U" className="img" /> 
+          </Box> */}
         </Box>
         <Box className={classes.info_container}>
           <Box className={classes.info_left}>
             <Box className={classes.name_role_container}>
               <Typography className={classes.name} variant="body1">
                 {info?.name}
-              </Typography>
-              <Typography variant="caption" component="small">
-                Participant
               </Typography>
             </Box>
             <Box
@@ -181,16 +216,24 @@ export default function MemberCard({ info }: Props) {
                 width: "100%",
               }}
             >
-              <Typography className={classes.id_info}>
-                ID: {info?.id}
+              <Typography
+                style={{
+                  marginBottom: 10,
+                  fontSize: 18,
+                  fontWeight: "bolder",
+                  color: colors.logo_brown,
+                  textTransform: "uppercase",
+                }}
+              >
+                PROTOCOL
               </Typography>
             </Box>
           </Box>
-          <Box className={classes.info_right}>
+          {/* <Box className={classes.info_right}>
             <Box className={classes.org_logo_container}>
               <img src={resources.PartCardLogo} alt="logo" className="img" />
             </Box>
-          </Box>
+          </Box> */}
         </Box>
       </Paper>
     </Grid>
