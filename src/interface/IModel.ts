@@ -13,6 +13,18 @@ export interface IParticipant {
   gender: string;
   conference_id: string;
   accomodation: number;
+  package_id: string;
+}
+
+export interface IConferencePackage {
+  id: string;
+  title: string;
+  conferenceId: string;
+  costOfFeeding: number;
+  costOfAccomodation: number;
+  materialCost: number;
+  conferenceDuration: number;
+  registrationFee: number;
 }
 
 export interface IProgram {
@@ -47,10 +59,10 @@ export interface IGuestInfo {
   picture: string;
 }
 
-export interface IPrintValues{
-total:number;
-count:number;
-value:number;
-start:number;
-end:number;
+export interface IPrintValues {
+  total: number;
+  count: number;
+  value: number;
+  start: number;
+  end: number;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import {
+  AddEventPage,
   GuestPage,
   HomePage,
   MeetingsPage,
@@ -29,6 +30,7 @@ export default function Router() {
         <Route path="conference" element={<MeetingsPage />} />
         <Route path="users" element={<UsersPage />} />
         <Route path="profile" element={<ProfilePage />} />
+        <Route path="event/add" element={<AddEventPage />} />
         <Route
           path="participant/register"
           element={<RegisterParticipantPage />}

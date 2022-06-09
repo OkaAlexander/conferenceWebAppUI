@@ -1,4 +1,8 @@
-import { IParticipant, IPrintValues } from "../../interface/IModel";
+import {
+  IParticipant,
+  IPrintValues,
+  IConferencePackage,
+} from "../../interface/IModel";
 
 export function formatValues(values: IPrintValues) {
   // console.log(values)
@@ -65,4 +69,25 @@ export function handleDecrement(
         : values.end,
   };
   return data;
+}
+
+export function getPackageInfo(
+  packages: IConferencePackage[],
+  id: string
+): IConferencePackage {
+  const info = packages.find((p) => p.id === id);
+  if (info) {
+    return info;
+  } else {
+    return {
+      id: "",
+      title: "Unavailable",
+      conferenceDuration: 0,
+      costOfAccomodation: 0,
+      costOfFeeding: 0,
+      materialCost: 0,
+      registrationFee: 0,
+      conferenceId: "",
+    };
+  }
 }

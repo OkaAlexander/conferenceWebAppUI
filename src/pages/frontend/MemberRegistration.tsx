@@ -11,20 +11,27 @@ import {
 } from "@material-ui/core";
 import { Input, SpinnerLoader } from "../../components";
 import DropDown from "./../../components/frontend/DropDown";
-import { DisabilityData, GenderData } from "./../../data/form";
+import {
+  DisabilityData,
+  GenderData,
+  initialParticipantInfo,
+} from "./../../data/form";
 import { resources } from "./../../resources/resources";
 import { colors } from "../../constants/colors";
 import { Zoom } from "react-awesome-reveal";
 import { useAppDispatch, useAppSelector } from "./../../app/hooks";
-import { IParticipant } from "../../interface/IModel";
+import { IConferencePackage, IParticipant } from "../../interface/IModel";
 import { InputFiles } from "typescript";
 import {
   AddConferenceMemberThunk,
   AddParticipantThunk,
+  GetConferencePackagesThunk,
   GetConferencesThunk,
 } from "../../functions";
 import { Navbar } from "../../shared";
 import { useNavigate } from "react-router-dom";
+import { Visibility } from "@material-ui/icons";
+import { Modal, PackageInfoView } from "../../views";
 const styles = makeStyles(
   (theme) => ({
     root: {
@@ -121,6 +128,11 @@ const styles = makeStyles(
 export default function MemberRegistration() {
   const classes = styles();
   const navigation = useNavigate();
+  const [view, setView] = useState<boolean>(false);
+  const [packages, setPackages] = useState<IConferencePackage[]>([]);
+  const { conference_packages } = useAppSelector(
+    (state) => state.ConferencePackagesReducer
+  );
   const { conferences } = useAppSelector((state) => state.ConferencesReducer);
   const { loading, error, message } = useAppSelector(
     (state) => state.ResponseReducer
@@ -131,22 +143,7 @@ export default function MemberRegistration() {
     file: null,
     image: "",
   });
-  const [form, setForm] = useState<IParticipant>({
-    name: "",
-    phone: "",
-    email: "",
-    gender: "",
-    diet: "",
-    location: "",
-    organization: "",
-    position: "",
-    disabled: 0,
-    disability: "",
-    conference_id: "",
-    id: "",
-    picture: "",
-    accomodation: 0,
-  });
+  const [form, setForm] = useState<IParticipant>(initialParticipantInfo);
 
   useEffect(() => {
     if (formFile.file) {
@@ -165,6 +162,7 @@ export default function MemberRegistration() {
   }, [formFile.file]);
   useEffect(() => {
     dispatch(GetConferencesThunk());
+    dispatch(GetConferencePackagesThunk());
   }, []);
 
   useEffect(() => {
@@ -177,6 +175,13 @@ export default function MemberRegistration() {
       setForm({ ...form, conference_id: confs[confs.length - 1].id });
     }
   }, []);
+  useEffect(() => {
+    setPackages(
+      conference_packages.filter((cp) => cp.conferenceId === form.conference_id)
+    );
+  }, [conference_packages, form.conference_id]);
+  const [packInfo, setPackage] = useState<IConferencePackage | null>(null);
+
   function HandleSubmit() {
     const formdata = new FormData();
     const f: any = formFile.file;
@@ -193,6 +198,7 @@ export default function MemberRegistration() {
     formdata.append("location", form.location);
     formdata.append("conference_id", form.conference_id);
     formdata.append("accomodation", form.accomodation.toString());
+    formdata.append("package_id", form.package_id);
     dispatch(AddConferenceMemberThunk(formdata));
   }
   return (
@@ -200,6 +206,15 @@ export default function MemberRegistration() {
       <Navbar home />
       <SpinnerLoader open={loading} />
       <Container className={classes.container}>
+        {packInfo && (
+          <Modal
+            open={view}
+            width={500}
+            title="Conference Package Info"
+            handleClose={() => setView(false)}
+            children={<PackageInfoView info={packInfo} />}
+          />
+        )}
         <Box className={classes.form_container}>
           <Zoom duration={750} delay={100} style={{ width: "100%" }}>
             <Box className={classes.input_container}>
@@ -344,6 +359,49 @@ export default function MemberRegistration() {
                     </MenuItem>
                   ))}
                 </TextField>
+              </Box>
+
+              <Box
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <TextField
+                  disabled={Boolean(packages.length === 0)}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  label="Conference Package"
+                  select
+                  onChange={(e) =>
+                    setForm({ ...form, package_id: e.target.value })
+                  }
+                >
+                  {packages.map((p) => (
+                    <MenuItem
+                      onClick={() => {
+                        setPackage(p);
+                      }}
+                      value={p.id}
+                    >
+                      {p.title}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <Button
+                  style={{ marginLeft: 10, height: 38 }}
+                  size="small"
+                  variant="outlined"
+                  color="default"
+                  disabled={Boolean(!packInfo)}
+                  onClick={() => setView(true)}
+                >
+                  <Visibility htmlColor={colors.logo_brown} />
+                </Button>
               </Box>
 
               <Box className={classes.form_container}>

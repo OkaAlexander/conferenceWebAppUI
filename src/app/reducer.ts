@@ -6,7 +6,8 @@ import {
   ConferencesReducer,
   GuestReducer,
   MemberReducer,
-  PrintReducer
+  PrintReducer,
+  ConferencePackagesReducer,
 } from "../features";
 
 const reducer = combineReducers({
@@ -16,7 +17,8 @@ const reducer = combineReducers({
   ParticipantsReducer,
   GuestReducer,
   MemberReducer,
-  PrintReducer
+  PrintReducer,
+  ConferencePackagesReducer,
 });
 
 export default reducer;

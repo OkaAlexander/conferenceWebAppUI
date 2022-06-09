@@ -26,7 +26,11 @@ import {
   ResponseDisplayCard,
   SpinnerLoader,
 } from "../../components";
-import { GetConferencesThunk, GetParticipantsThunk } from "../../functions";
+import {
+  GetConferencePackagesThunk,
+  GetConferencesThunk,
+  GetParticipantsThunk,
+} from "../../functions";
 import { ICsvRows } from "../../interface/IServices";
 import { ExportServices } from "../../services";
 import { resources } from "../../resources/resources";
@@ -35,8 +39,12 @@ import { IParticipant } from "../../interface/IModel";
 import CloseIcon from "@material-ui/icons/Close";
 import { RemoveMemberThunk } from "../../functions/member";
 import { ResetResponse } from "../../features/slice/ResponseSlice";
+import { getPackageInfo } from "../services/services";
 export default function ParticipantsPage() {
   const classes = participants_styles();
+  const { conference_packages } = useAppSelector(
+    (state) => state.ConferencePackagesReducer
+  );
   const dispatch = useAppDispatch();
   const { participants } = useAppSelector((state) => state.ParticipantsReducer);
   const { conferences } = useAppSelector((state) => state.ConferencesReducer);
@@ -65,6 +73,7 @@ export default function ParticipantsPage() {
   useEffect(() => {
     dispatch(GetParticipantsThunk());
     dispatch(GetConferencesThunk());
+    dispatch(GetConferencePackagesThunk());
   }, []);
 
   function getConferenceTitle(id: string) {
@@ -223,6 +232,12 @@ export default function ParticipantsPage() {
                 style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
                 align="left"
               >
+                Package
+              </TableCell>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+              >
                 Card
               </TableCell>
               <TableCell
@@ -243,6 +258,9 @@ export default function ParticipantsPage() {
                   <TableCell align="left">{part.gender}</TableCell>
                   <TableCell align="left">{part.location}</TableCell>
                   <TableCell align="left">{part.id}</TableCell>
+                  <TableCell align="left">
+                    {getPackageInfo(conference_packages, part.package_id).title}
+                  </TableCell>
                   <TableCell align="left">
                     <IconButton
                       onClick={() => setSelectedParticipant(part)}

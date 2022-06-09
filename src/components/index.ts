@@ -9,3 +9,5 @@ export { default as ConferenceInfoCard } from "./frontend/ConferenceInfoCard";
 export { default as MemberCard } from "./frontend/MemberCard";
 export { default as ConfirmModal } from "./frontend/ConfirmModal";
 export { default as ResponseDisplayCard } from "./frontend/ResponseDisplayCard";
+export { default as SmallLabel } from "./frontend/SmallLabel";
+export { default as BigLabel } from "./frontend/BigLabel";

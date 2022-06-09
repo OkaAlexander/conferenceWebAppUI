@@ -1,4 +1,11 @@
-import { IGuestInfo, IParticipant, IPrintValues, IProgram, IUser } from "./IModel";
+import { IConferencePackage } from "./IConferencePackage";
+import {
+  IGuestInfo,
+  IParticipant,
+  IPrintValues,
+  IProgram,
+  IUser,
+} from "./IModel";
 
 export interface IResponseSlice {
   loading: boolean;
@@ -27,6 +34,10 @@ export interface IGuestSlice {
   guest: IGuestInfo[];
 }
 
-export interface IPrintSlice{
-  values:IPrintValues
+export interface IPrintSlice {
+  values: IPrintValues;
+}
+
+export interface IConferencePackageSlice {
+  conference_packages: IConferencePackage[];
 }

@@ -19,6 +19,7 @@ import { UpdateInfoThunk } from "../../functions/member";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaTimes } from "react-icons/fa";
 import { IParticipant } from "../../interface/IModel";
+import { initialParticipantInfo } from "../../data/form";
 const styles = makeStyles(
   (theme) => ({
     root: {
@@ -95,22 +96,7 @@ export default function HomePage() {
   );
   const { info } = useAppSelector((state) => state.MemberReducer);
   const dispatch = useAppDispatch();
-  const [form, setForm] = useState<IParticipant>({
-    name: "",
-    email: "",
-    id: "",
-    phone: "",
-    gender: "",
-    diet: "",
-    position: "",
-    organization: "",
-    accomodation: 0,
-    location: "",
-    conference_id: "",
-    picture: "",
-    disability: "",
-    disabled: 0,
-  });
+  const [form, setForm] = useState<IParticipant>(initialParticipantInfo);
 
   useEffect(() => {
     !info && navigation("uenr-conference/member/login");

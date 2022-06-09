@@ -5,4 +5,5 @@ export { default as ProfilePage } from "./ProfilePage";
 export { default as MeetingsPage } from "./MeetingsPage";
 export { default as RegisterParticipantPage } from "./RegisterParticipantPage";
 export { default as GuestPage } from "./GuestPage";
-export {default as PrintCardsPage} from './PrintCardsPage'
+export { default as PrintCardsPage } from "./PrintCardsPage";
+export { default as AddEventPage } from "./AddEventPage";

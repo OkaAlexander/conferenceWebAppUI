@@ -8,3 +8,4 @@ export { default as UserLogoutThunk } from "./thunks/UserLogoutThunk";
 export { default as AddConferenceMemberThunk } from "./thunks/AddConferenceMemberThunk";
 export { default as AddGuestThunk } from "./thunks/AddGuestThunk";
 export { default as GetGuestThunk } from "./thunks/GetGuestThunk";
+export { default as GetConferencePackagesThunk } from "./thunks/GetConferencePackageThunk";

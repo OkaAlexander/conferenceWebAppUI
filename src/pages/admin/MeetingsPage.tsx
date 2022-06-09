@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { FaCog, FaEdit, FaFileSignature, FaPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { SpinnerLoader } from "../../components";
 import { colors } from "../../constants/colors";
@@ -74,6 +75,7 @@ const styles = makeStyles(
 );
 export default function MeetingsPage() {
   const classes = styles();
+  const navigation = useNavigate();
   const [modal, setModal] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.ResponseReducer);
@@ -100,20 +102,20 @@ export default function MeetingsPage() {
             variant="contained"
             size="small"
             color="primary"
-            onClick={() => setModal(true)}
+            onClick={() => navigation("/home/event/add")}
           >
             <FaFileSignature />
           </Button>
         </Box>
       </Paper>
       <Box style={{ width: "100%" }}>
-        <Modal
+        {/* <Modal
           open={modal}
-          width={450}
+          width={800}
           title="Conference Details"
           handleClose={() => setModal(false)}
           children={<ConferenceForm />}
-        />
+        /> */}
 
         <TableContainer style={{ width: "100%" }}>
           <Table>

@@ -11,7 +11,8 @@ enum EndpointRoutes {
   user_login = "api/user/login",
   user_add = "api/user/add",
   users_get = "api/users/get",
-  partipant_remove="api/member/remove"
+  partipant_remove = "api/member/remove",
+  packages_get = "api/packages/get",
 }
 
 export default EndpointRoutes;

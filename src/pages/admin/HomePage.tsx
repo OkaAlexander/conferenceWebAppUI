@@ -1,14 +1,16 @@
 import { Box, useMediaQuery, useTheme } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { AdminRoutes } from "../../constants/routes";
+import { GetConferencePackagesThunk } from "../../functions";
 import { Navbar } from "../../shared";
 import { home_styles } from "../../styles/admin";
 import { SidebarView } from "../../views";
 
 export default function HomePage() {
   const classes = home_styles();
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState<boolean>(true);
   const { user } = useAppSelector((state) => state.UserReducer);
   const mobile = useMediaQuery(useTheme().breakpoints.down("sm"));
@@ -20,6 +22,7 @@ export default function HomePage() {
   ////
   useEffect(() => {
     navigation("participant/register");
+    dispatch(GetConferencePackagesThunk());
   }, []);
 
   useEffect(() => {
