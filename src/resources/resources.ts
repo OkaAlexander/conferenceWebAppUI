@@ -12,7 +12,11 @@ import OkaPassport from "../assets/oka_passport.png";
 import PartCardLogo from "../assets/part_card_logo.png";
 import uenrlogo from "../assets/uenrLogo.png";
 import default_img from "../assets/default_img1.png";
+import dept_logo from "../assets/dep_logo.png";
 import default_conf from "../assets/default_conf.jpeg";
+import registrer_sign from "../assets/registrer.png";
+import vc_sign from "../assets/VC.png";
+import uenrlogocert from "../assets/certLogo.png";
 export const resources = {
   Meeting,
   Logo,
@@ -29,4 +33,8 @@ export const resources = {
   uenrlogo,
   default_img,
   default_conf,
+  dept_logo,
+  registrer_sign,
+  vc_sign,
+  uenrlogocert,
 };

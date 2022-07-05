@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   AddEventPage,
+  CertificationPage,
   GuestPage,
   HomePage,
   MeetingsPage,
@@ -27,6 +28,10 @@ export default function Router() {
       <Route path="/home" element={<HomePage />}>
         <Route path="guest" element={<GuestPage />} />
         <Route path="participants" element={<ParticipantsPage />} />
+        <Route
+          path="participants/certificate/:id"
+          element={<CertificationPage />}
+        />
         <Route path="conference" element={<MeetingsPage />} />
         <Route path="users" element={<UsersPage />} />
         <Route path="profile" element={<ProfilePage />} />

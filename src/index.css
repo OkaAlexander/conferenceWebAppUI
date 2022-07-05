@@ -20,6 +20,11 @@ body {
   font-family: "Whiskey Girls 3D";
   /* src: url("../src/font/FontsFree-Net-Hidayatullah-2.ttf"); */
   src: url("../src/font/FontsFree-Net-whiskeygirls3d.ttf");
+
+  /* font-family: "Creattion Demo Font"; */
+  /* src: url("./font/font1.otf"); */
+  font-family: "Chopin Script";
+  src: url("./font/font2.ttf");
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -31,7 +36,7 @@ code {
   box-sizing: border-box;
 }
 
-.img {
+img {
   width: 100%;
   height: 100%;
   object-fit: fill;

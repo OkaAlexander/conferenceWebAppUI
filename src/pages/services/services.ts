@@ -81,7 +81,7 @@ export function getPackageInfo(
   } else {
     return {
       id: "",
-      title: "Unavailable",
+      title: "Not Specify",
       conferenceDuration: 0,
       costOfAccomodation: 0,
       costOfFeeding: 0,

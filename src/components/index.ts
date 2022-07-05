@@ -11,3 +11,7 @@ export { default as ConfirmModal } from "./frontend/ConfirmModal";
 export { default as ResponseDisplayCard } from "./frontend/ResponseDisplayCard";
 export { default as SmallLabel } from "./frontend/SmallLabel";
 export { default as BigLabel } from "./frontend/BigLabel";
+export { default as Expanded } from "./frontend/Expanded";
+export { default as SizedBox } from "./frontend/SizedBox";
+export { default as TopDeco } from "./frontend/TopDeco";
+export { default as BottomDeco } from "./frontend/BottomDeco";

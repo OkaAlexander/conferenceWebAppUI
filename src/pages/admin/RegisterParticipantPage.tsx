@@ -27,7 +27,7 @@ import {
   GetConferencePackagesThunk,
   GetConferencesThunk,
 } from "../../functions";
-import { Visibility } from "@material-ui/icons";
+import { BorderAll, Visibility } from "@material-ui/icons";
 const styles = makeStyles(
   (theme) => ({
     root: {
@@ -258,7 +258,7 @@ export default function RegisterParticipantPage() {
                   variant="outlined"
                   size="small"
                   className={`${classes.diet} ${classes.input}`}
-                  label="Preferred Diet"
+                  label="Your expectations"
                   fullWidth
                   onChange={(e) =>
                     setForm({ ...form, diet: e.target.value.toString() })
@@ -335,7 +335,7 @@ export default function RegisterParticipantPage() {
                   </TextField>
                 )}
 
-                <TextField
+                {/* <TextField
                   variant="outlined"
                   size="small"
                   className={`${classes.diet1} ${classes.input}`}
@@ -354,7 +354,7 @@ export default function RegisterParticipantPage() {
                       {ac.title}
                     </MenuItem>
                   ))}
-                </TextField>
+                </TextField> */}
               </Box>
               <Box
                 style={{
@@ -371,6 +371,7 @@ export default function RegisterParticipantPage() {
                   variant="outlined"
                   size="small"
                   label="Conference Package"
+                  id="txtpackage"
                   select
                   onChange={(e) =>
                     setForm({ ...form, package_id: e.target.value })
@@ -388,14 +389,17 @@ export default function RegisterParticipantPage() {
                   ))}
                 </TextField>
                 <Button
-                  style={{ marginLeft: 10, height: 38 }}
+                  style={{ marginLeft: 10, height: 38, width: "20vw" }}
                   size="small"
                   variant="outlined"
                   color="default"
+                  id="btnenable"
                   disabled={Boolean(!packInfo)}
                   onClick={() => setView(true)}
                 >
-                  <Visibility htmlColor={colors.logo_brown} />
+                  <Typography variant="caption" component="strong">
+                    View Package details
+                  </Typography>
                 </Button>
               </Box>
               <Box className={classes.form_container}>

@@ -16,7 +16,7 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import { participants_styles } from "../../styles/admin";
 import { useAppDispatch, useAppSelector } from "./../../app/hooks";
 import {
@@ -40,12 +40,17 @@ import CloseIcon from "@material-ui/icons/Close";
 import { RemoveMemberThunk } from "../../functions/member";
 import { ResetResponse } from "../../features/slice/ResponseSlice";
 import { getPackageInfo } from "../services/services";
+import { MoreVertOutlined } from "@material-ui/icons";
+import { ParticipantActionMenu } from "../../shared";
+import { useNavigate } from "react-router-dom";
 export default function ParticipantsPage() {
   const classes = participants_styles();
   const { conference_packages } = useAppSelector(
     (state) => state.ConferencePackagesReducer
   );
   const dispatch = useAppDispatch();
+  const navigation = useNavigate();
+  const [action, setAction] = useState<HTMLElement | null>(null);
   const { participants } = useAppSelector((state) => state.ParticipantsReducer);
   const { conferences } = useAppSelector((state) => state.ConferencesReducer);
   const { loading, message, error } = useAppSelector(
@@ -54,11 +59,22 @@ export default function ParticipantsPage() {
   const [Participants, setParticipants] = useState<ICsvRows[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [part, setPart] = useState<IParticipant | null>(null);
+  const [info, setInfo] = useState<IParticipant | null>(null);
   const [selectedParticipant, setSelectedParticipant] =
     useState<IParticipant | null>(null);
   var totalMale = 0;
   var totalFemale = 0;
   var totalParticipant = 0;
+
+  //
+  function handleClick(event: MouseEvent<HTMLButtonElement>) {
+    setAction(event.currentTarget);
+    const partId = event.currentTarget.name;
+    const data = participants.find((p) => p.id === partId);
+    if (data) {
+      setInfo(data);
+    }
+  }
 
   /////
   function HandleConfirmationModal(response: number) {
@@ -92,18 +108,33 @@ export default function ParticipantsPage() {
           Gender: part.gender,
           Town_City: part.location.toUpperCase(),
           Organization: part.organization.toUpperCase(),
-          SpecialDiet: part.diet.toUpperCase(),
+          YourExpectation: part.diet.toUpperCase(),
           Disability: part.disabled === 0 ? "No" : "Yes",
           DisabledType: part.disability,
-          AccommodationRequired: part.accomodation === 0 ? "No" : "Yes",
+          // AccommodationRequired: part.accomodation === 0 ? "No" : "Yes",
+          SelectedPackage: getPackageInfo(conference_packages, part.package_id)
+            .title,
         });
       }
+
       setParticipants(FilteredParts);
     }
   }, [participants]);
 
+  function handleClose(name: string) {
+    setAction(null);
+    switch (name) {
+      case "id":
+        setSelectedParticipant(info);
+        break;
+      case "cert":
+        navigation("certificate/" + info?.id);
+    }
+  }
+
   return (
     <Box className={classes.root}>
+      <ParticipantActionMenu handleClose={handleClose} anchorEl={action} />
       <SpinnerLoader open={loading} />
       <ConfirmModal
         open={showModal}
@@ -244,6 +275,12 @@ export default function ParticipantsPage() {
                 style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
                 align="left"
               >
+                Action
+              </TableCell>
+              <TableCell
+                style={{ fontSize: 15, color: "#000", fontWeight: "bold" }}
+                align="left"
+              >
                 Delete
               </TableCell>
             </TableRow>
@@ -267,6 +304,15 @@ export default function ParticipantsPage() {
                       size="small"
                     >
                       <FaIdCard />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell align="left">
+                    <IconButton
+                      name={part.id}
+                      onClick={handleClick}
+                      size="small"
+                    >
+                      <MoreVertOutlined />
                     </IconButton>
                   </TableCell>
                   <TableCell>

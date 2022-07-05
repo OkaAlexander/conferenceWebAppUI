@@ -5,8 +5,9 @@ export interface ICsvRows {
   Gender: string;
   Town_City: string;
   Organization: string;
-  SpecialDiet: string;
+  YourExpectation: string;
   Disability: string;
   DisabledType: string;
-  AccommodationRequired: string;
+  // AccommodationRequired: string;
+  SelectedPackage: string;
 }

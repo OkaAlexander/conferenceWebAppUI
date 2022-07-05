@@ -265,7 +265,7 @@ export default function MemberRegistration() {
                   variant="outlined"
                   size="small"
                   className={`${classes.diet} ${classes.input}`}
-                  label="Prefered Diet"
+                  label="Your expectations"
                   fullWidth
                   onChange={(e) =>
                     setForm({ ...form, diet: e.target.value.toString() })
@@ -339,7 +339,7 @@ export default function MemberRegistration() {
                     {conferences[conferences.length - 1].title}
                   </MenuItem>
                 </TextField>
-                <TextField
+                {/* <TextField
                   variant="outlined"
                   size="small"
                   className={`${classes.diet1} ${classes.input}`}
@@ -358,10 +358,10 @@ export default function MemberRegistration() {
                       {ac.title}
                     </MenuItem>
                   ))}
-                </TextField>
+                </TextField> */}
               </Box>
 
-              <Box
+              {/* <Box
                 style={{
                   display: "flex",
                   width: "100%",
@@ -393,29 +393,35 @@ export default function MemberRegistration() {
                   ))}
                 </TextField>
                 <Button
-                  style={{ marginLeft: 10, height: 38 }}
+                  style={{
+                    marginLeft: 10,
+                    height: 38,
+                  }}
                   size="small"
+                  fullWidth
                   variant="outlined"
                   color="default"
                   disabled={Boolean(!packInfo)}
                   onClick={() => setView(true)}
                 >
-                  <Visibility htmlColor={colors.logo_brown} />
+                  <Typography variant="caption" component="strong">
+                    View Package details
+                  </Typography>
                 </Button>
-              </Box>
+              </Box> */}
 
               <Box className={classes.form_container}>
                 <Box style={{ justifyContent: "flex-start" }}>
-                  <Box style={{ width: 200, height: 180 }} component={Paper}>
+                  {/* <Box style={{ width: 200, height: 180 }} component={Paper}>
                     <img
                       alt="test"
                       src={formFile.image ? formFile.image : resources.Passport}
                       className="img"
                     />
-                  </Box>
+                  </Box> */}
                 </Box>
                 <Box className={classes.action_container}>
-                  <TextField
+                  {/* <TextField
                     className={classes.button}
                     variant="outlined"
                     size="small"
@@ -426,7 +432,7 @@ export default function MemberRegistration() {
                         file: e.target.files ? e.target.files[0] : null,
                       })
                     }
-                  />
+                  /> */}
                   <Button
                     fullWidth
                     variant="contained"
