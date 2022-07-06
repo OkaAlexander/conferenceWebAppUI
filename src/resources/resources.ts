@@ -17,6 +17,7 @@ import default_conf from "../assets/default_conf.jpeg";
 import registrer_sign from "../assets/registrer.png";
 import vc_sign from "../assets/VC.png";
 import uenrlogocert from "../assets/certLogo.png";
+import certbg from "../assets/CERT.jpg";
 export const resources = {
   Meeting,
   Logo,
@@ -37,4 +38,5 @@ export const resources = {
   registrer_sign,
   vc_sign,
   uenrlogocert,
+  certbg,
 };

@@ -123,14 +123,23 @@ export default function CertificationPage() {
         />
       </Box>
 
-      <Container innerRef={certRef} className={classes.container}>
-        <Box className={classes.top_deco}>
+      <Container
+        style={{
+          backgroundImage: `url(${resources.certbg})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+        innerRef={certRef}
+        className={classes.container}
+      >
+        {/* <Box className={classes.top_deco}>
           <TopDeco />
           <TopDeco h={70} w={110} />
           <TopDeco h={80} w={120} />
-        </Box>
+        </Box> */}
         <Box style={{ flex: 1 }}>
-          <Box className={classes.row_container}>
+          <Box className={classes.row_container} style={{ marginTop: "2.8%" }}>
             <Typography
               variant="caption"
               sx={(theme) => ({
@@ -143,7 +152,7 @@ export default function CertificationPage() {
             </Typography>
           </Box>
           <SizedBox height={2.5} />
-          <Box className={classes.row_container}>
+          <Box className={classes.row_container} style={{ paddingTop: "5%" }}>
             <BigLabel bold fontsize={3.5} text="CERTIFICATE" />
             <SizedBox width={1} />
             <BigLabel bold text="of" fontfamily={fonts.font2} fontsize={3.5} />
@@ -178,7 +187,7 @@ export default function CertificationPage() {
               color={"#000"}
               text="Theme"
             />
-            <SizedBox height={-1} />
+            <SizedBox height={1} />
             <Box style={{ width: "60%" }}>
               <BigLabel text={`${conference?.description}`} centered />
             </Box>
@@ -201,19 +210,10 @@ export default function CertificationPage() {
               <Typography
                 variant="body1"
                 sx={(theme) => ({
-                  width: 100,
-                  // borderBottom: "1px solid #000",
+                  width: 200,
+                  borderBottom: "1px solid #000",
                 })}
               />
-              <img
-                src={resources.vc_sign}
-                alt=""
-                style={{
-                  width: 70,
-                  height: 60,
-                }}
-              />
-
               <SizedBox height={0.5} />
               <SmallLabel text="Prof. Elvis Asare-Bediako" />
               <SizedBox height={-0.5} />
@@ -222,14 +222,21 @@ export default function CertificationPage() {
             <Box className={classes.column_container}>
               <Box
                 style={{
-                  width: 200,
-                  height: 90,
+                  width: 170,
+                  height: 50,
                   borderRadius: "5px",
                   background: "transparent",
                   marginLeft: 50,
                 }}
               >
-                <img src={resources.uenrlogocert} alt="" />
+                <img
+                  src={resources.uenrlogocert}
+                  alt=""
+                  style={{
+                    marginTop: "-10%",
+                    marginLeft: "50%",
+                  }}
+                />
               </Box>
             </Box>
             <SizedBox width={-10} />
@@ -257,11 +264,10 @@ export default function CertificationPage() {
               <Typography
                 variant="body1"
                 sx={(theme) => ({
-                  width: 100,
-                  // borderBottom: "1px solid #000",
+                  width: 200,
+                  borderBottom: "1px solid #000",
                 })}
               />
-              <img src={resources.registrer_sign} alt="" />
 
               <SizedBox height={0.5} />
               <SmallLabel text="Solomon Panford ESQ, APR" />
@@ -272,7 +278,7 @@ export default function CertificationPage() {
           </Box>
           <Box></Box>
         </Box>
-        <Box
+        {/* <Box
           style={{
             position: "absolute",
             bottom: -16,
@@ -287,7 +293,7 @@ export default function CertificationPage() {
           <SizedBox width={1} />
           <BottomDeco h={80} w={120} />
           <SizedBox width={1.5} />
-        </Box>
+        </Box> */}
       </Container>
     </Box>
   );
