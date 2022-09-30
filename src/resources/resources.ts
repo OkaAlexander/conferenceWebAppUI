@@ -18,6 +18,9 @@ import registrer_sign from "../assets/registrer.png";
 import vc_sign from "../assets/VC.png";
 import uenrlogocert from "../assets/certLogo.png";
 import certbg from "../assets/CERT.jpg";
+import bgGaae from "../assets/bgGAAE.jpeg";
+import gaaftarg from "../assets/gaaetarg.jpeg";
+import uenrmainLogo from "../assets/uenrmainlogo.png";
 export const resources = {
   Meeting,
   Logo,
@@ -39,4 +42,7 @@ export const resources = {
   vc_sign,
   uenrlogocert,
   certbg,
+  bgGaae,
+  gaaftarg,
+  uenrmainLogo,
 };

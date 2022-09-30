@@ -252,20 +252,20 @@ export default function MemberRegistration() {
                     organization: e.target.value.toUpperCase(),
                   })
                 }
-                label="Name of Organization"
+                label="Institutional Affiliation"
               />
               <Input
                 change={(e) =>
                   setForm({ ...form, position: e.target.value.toUpperCase() })
                 }
-                label="Position / Rank"
+                label="Occupation"
               />
               <Box className={classes.input_group}>
                 <TextField
                   variant="outlined"
                   size="small"
                   className={`${classes.diet} ${classes.input}`}
-                  label="Your expectations"
+                  label="Country/City"
                   fullWidth
                   onChange={(e) =>
                     setForm({ ...form, diet: e.target.value.toString() })
@@ -310,23 +310,25 @@ export default function MemberRegistration() {
                 change={(e) =>
                   setForm({ ...form, location: e.target.value.toUpperCase() })
                 }
-                label="City / Town"
+                label="Address"
               />
-              {/* <Input
-                change={(e) =>
-                  setForm({
-                    ...form,
-                    special_need: e.target.value.toUpperCase(),
-                  })
-                }
-                label="Special Need"
-              /> */}
+              {
+                // <Input
+                //   change={(e) =>
+                //     setForm({
+                //       ...form,
+                //       special_need: e.target.value.toUpperCase(),
+                //     })
+                //   }
+                //   label="Special Need"
+                // />
+              }
               <Box className={classes.input_group}>
                 <TextField
                   className={classes.input}
                   variant="outlined"
                   size="small"
-                  label="Conference"
+                  label="Conference Name"
                   select
                   onChange={(e) =>
                     setForm({ ...form, conference_id: e.target.value })
@@ -339,11 +341,11 @@ export default function MemberRegistration() {
                     {conferences[conferences.length - 1].title}
                   </MenuItem>
                 </TextField>
-                {/* <TextField
+                <TextField
                   variant="outlined"
                   size="small"
                   className={`${classes.diet1} ${classes.input}`}
-                  label="Do you require Accomodation?"
+                  label="First time to attend this conference?"
                   fullWidth
                   select
                   onChange={(e) =>
@@ -358,57 +360,59 @@ export default function MemberRegistration() {
                       {ac.title}
                     </MenuItem>
                   ))}
-                </TextField> */}
+                </TextField>
               </Box>
 
-              {/* <Box
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <TextField
-                  disabled={Boolean(packages.length === 0)}
-                  fullWidth
-                  variant="outlined"
-                  size="small"
-                  label="Conference Package"
-                  select
-                  onChange={(e) =>
-                    setForm({ ...form, package_id: e.target.value })
-                  }
-                >
-                  {packages.map((p) => (
-                    <MenuItem
-                      onClick={() => {
-                        setPackage(p);
-                      }}
-                      value={p.id}
-                    >
-                      {p.title}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <Button
+              {
+                <Box
                   style={{
-                    marginLeft: 10,
-                    height: 38,
+                    display: "flex",
+                    width: "100%",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
-                  size="small"
-                  fullWidth
-                  variant="outlined"
-                  color="default"
-                  disabled={Boolean(!packInfo)}
-                  onClick={() => setView(true)}
                 >
-                  <Typography variant="caption" component="strong">
-                    View Package details
-                  </Typography>
-                </Button>
-              </Box> */}
+                  <TextField
+                    disabled={Boolean(packages.length === 0)}
+                    fullWidth
+                    variant="outlined"
+                    size="small"
+                    label="Conference Package"
+                    select
+                    onChange={(e) =>
+                      setForm({ ...form, package_id: e.target.value })
+                    }
+                  >
+                    {packages.map((p) => (
+                      <MenuItem
+                        onClick={() => {
+                          setPackage(p);
+                        }}
+                        value={p.id}
+                      >
+                        {p.title}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                  <Button
+                    style={{
+                      marginLeft: 10,
+                      height: 38,
+                    }}
+                    size="small"
+                    fullWidth
+                    variant="outlined"
+                    color="default"
+                    disabled={Boolean(!packInfo)}
+                    onClick={() => setView(true)}
+                  >
+                    <Typography variant="caption" component="strong">
+                      View Package details
+                    </Typography>
+                  </Button>
+                </Box>
+              }
 
               <Box className={classes.form_container}>
                 <Box style={{ justifyContent: "flex-start" }}>

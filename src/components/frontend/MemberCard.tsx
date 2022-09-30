@@ -33,7 +33,7 @@ const styles = makeStyles(
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      height: 200,
+      height: 215,
       marginTop: 20,
       // borderBottomRightRadius: "80%",
     },
@@ -166,10 +166,10 @@ export default function MemberCard({ info }: Props) {
       <Paper ref={paperRef} className={classes.container}>
         <Box className={classes.top_container1}>
           <img
-            src={resources.PartCardLogo}
+            src={resources.uenrmainLogo}
             alt="logo"
             style={{
-              height: "180%",
+              height: "160%",
               width: "100%",
             }}
           />
@@ -177,10 +177,11 @@ export default function MemberCard({ info }: Props) {
         <Box
           className={classes.top_container}
           style={{
-            backgroundImage: `url(${resources.default_conf})`,
+            backgroundImage: `url(${resources.gaaftarg})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
+            marginTop: "2%",
           }}
         >
           {/* <Box className={classes.image_container}>
@@ -225,7 +226,7 @@ export default function MemberCard({ info }: Props) {
                   textTransform: "uppercase",
                 }}
               >
-                PROTOCOL
+                PARTICIPANT
               </Typography>
             </Box>
           </Box>

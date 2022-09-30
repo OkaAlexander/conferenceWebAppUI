@@ -40,16 +40,25 @@ export default function PackageInfoView({ info }: IProps) {
           <BigLabel text={info.title} />
         </Box>
         <Box className={classes.column_container}>
-          <SmallLabel text={"Registration Fee"} />
+          <SmallLabel text={"Membership"} />
           <Divider />
-          <BigLabel text={info.registrationFee.toString()} />
+
+          {info.title.length > 31 ? (
+            <BigLabel text={`$ ${info.registrationFee.toString()}`} />
+          ) : (
+            <BigLabel text={`GH₵ ${info.registrationFee.toString()}`} />
+          )}
         </Box>
         <Box className={classes.column_container}>
-          <SmallLabel text={"Cost Of Materials"} />
+          <SmallLabel text={"Payment Details"} />
           <Divider />
-          <BigLabel text={info.materialCost.toString()} />
+          <BigLabel
+            text={`Membership fees can be paid via the MTN Mobile Service to 
+              0558709486
+             Use your name as referencing`}
+          />
         </Box>
-        <Box className={classes.column_container}>
+        {/*<Box className={classes.column_container}>
           <SmallLabel text={"Cost Of Feeding"} />
           <Divider />
           <BigLabel text={info.costOfFeeding.toString()} />
@@ -63,14 +72,14 @@ export default function PackageInfoView({ info }: IProps) {
           <SmallLabel text={"Conference Duration"} />
           <Divider />
           <BigLabel text={info.conferenceDuration + " days"} />
-        </Box>
-        <Box className={classes.column_container}>
+        </Box> */}
+        {/* <Box className={classes.column_container}>
           <SmallLabel text={"Total Cost"} />
           <Divider />
           <BigLabel
             text={currency + calculatePackageCost(info).toFixed(2).toString()}
           />
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );
