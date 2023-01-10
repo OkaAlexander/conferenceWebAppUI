@@ -11,8 +11,9 @@ import { baseUrl } from "../../configuration/Configuration";
 import { colors } from "../../constants/colors";
 import { IParticipant } from "../../interface/IModel";
 import { resources } from "../../resources/resources";
-import { FcPrint } from "react-icons/fc";
+import { FcManager, FcPrint } from "react-icons/fc";
 import ReactPrint from "react-to-print";
+import { Stack } from "@mui/material";
 const styles = makeStyles(
   (theme) => ({
     root: {
@@ -174,19 +175,41 @@ export default function ConferenceIdModal({ handleClose, info }: Props) {
       />
       <Paper ref={paperRef} className={classes.container}>
         <Box className={classes.top_container1}>
-          <img
-            src={resources.PartCardLogo}
-            alt="logo"
-            style={{
-              height: "180%",
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
               width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "80%",
             }}
-          />
+          >
+            <img
+              src={resources.gaaeLogo}
+              alt="logo"
+              style={{
+                height: "100%",
+                width: "15%",
+              }}
+            />
+            <Typography
+              variant="body1"
+              style={{
+                fontSize: 12,
+                fontWeight: "bolder",
+                color: "#1B5E20",
+                textTransform: "uppercase",
+              }}
+            >
+              Ghana Association of Agricultural Economists - GAAE
+            </Typography>
+          </Stack>
         </Box>
         <Box
           className={classes.top_container}
           style={{
-            backgroundImage: `url(${resources.default_conf})`,
+            backgroundImage: `url(${resources.gaaftarg})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -204,6 +227,7 @@ export default function ConferenceIdModal({ handleClose, info }: Props) {
           <Box className={classes.info_left}>
             <Box className={classes.name_role_container}>
               <Typography className={classes.name} variant="body1">
+                <FcManager />
                 {info?.name}
               </Typography>
               {/* <Typography variant="caption" component="small">
@@ -228,11 +252,11 @@ export default function ConferenceIdModal({ handleClose, info }: Props) {
                   marginBottom: 10,
                   fontSize: 18,
                   fontWeight: "bolder",
-                  color: colors.logo_brown,
+                  color: "#1B5E20",
                   textTransform: "uppercase",
                 }}
               >
-                UDS-TAMALE: VICE CHANCELLOR
+                PARTICIPANT
               </Typography>
             </Box>
           </Box>

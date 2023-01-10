@@ -1,9 +1,11 @@
 import {
   Box,
+  Divider,
   Grid,
   IconButton,
   makeStyles,
   Paper,
+  styled,
   Typography,
 } from "@material-ui/core";
 import React, { ReactInstance, useRef } from "react";
@@ -12,9 +14,10 @@ import { baseUrl } from "../../configuration/Configuration";
 import { colors } from "../../constants/colors";
 import { IParticipant } from "../../interface/IModel";
 import { resources } from "../../resources/resources";
-import { FcPrint } from "react-icons/fc";
+import { FcManager, FcPrint } from "react-icons/fc";
 import ReactPrint from "react-to-print";
 import { url } from "inspector";
+import { Stack } from "@mui/material";
 const styles = makeStyles(
   (theme) => ({
     root: {
@@ -165,14 +168,36 @@ export default function MemberCard({ info }: Props) {
     <Grid component={Paper} item className={classes.grid_item}>
       <Paper ref={paperRef} className={classes.container}>
         <Box className={classes.top_container1}>
-          <img
-            src={resources.uenrmainLogo}
-            alt="logo"
-            style={{
-              height: "160%",
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
               width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "80%",
             }}
-          />
+          >
+            <img
+              src={resources.gaaeLogo}
+              alt="logo"
+              style={{
+                height: "120%",
+                width: "15%",
+              }}
+            />
+            <Typography
+              variant="body1"
+              style={{
+                fontSize: 12,
+                fontWeight: "bolder",
+                color: "#1B5E20",
+                textTransform: "uppercase",
+              }}
+            >
+              Ghana Association of Agricultural Economists - GAAE
+            </Typography>
+          </Stack>
         </Box>
         <Box
           className={classes.top_container}
@@ -181,7 +206,7 @@ export default function MemberCard({ info }: Props) {
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            marginTop: "2%",
+            marginTop: "0.5%",
           }}
         >
           {/* <Box className={classes.image_container}>
@@ -201,6 +226,7 @@ export default function MemberCard({ info }: Props) {
           <Box className={classes.info_left}>
             <Box className={classes.name_role_container}>
               <Typography className={classes.name} variant="body1">
+                <FcManager />
                 {info?.name}
               </Typography>
             </Box>
@@ -222,11 +248,11 @@ export default function MemberCard({ info }: Props) {
                   marginBottom: 10,
                   fontSize: 18,
                   fontWeight: "bolder",
-                  color: colors.logo_brown,
+                  color: "#1B5E20",
                   textTransform: "uppercase",
                 }}
               >
-                PARTICIPANT
+                Participant
               </Typography>
             </Box>
           </Box>

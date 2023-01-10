@@ -21,6 +21,9 @@ import certbg from "../assets/CERT.jpg";
 import bgGaae from "../assets/bgGAAE.jpeg";
 import gaaftarg from "../assets/gaaetarg.jpeg";
 import uenrmainLogo from "../assets/uenrmainlogo.png";
+import gaaeLogo from "../assets/gaae_logo.png";
+import knustLogo from "../assets/knust_logo.png";
+import gaaebg from "../assets/gaaetargbg.png";
 export const resources = {
   Meeting,
   Logo,
@@ -45,4 +48,7 @@ export const resources = {
   bgGaae,
   gaaftarg,
   uenrmainLogo,
+  gaaeLogo,
+  knustLogo,
+  gaaebg,
 };
