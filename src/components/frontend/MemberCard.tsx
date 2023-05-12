@@ -18,13 +18,14 @@ import { FcManager, FcPrint } from "react-icons/fc";
 import ReactPrint from "react-to-print";
 import { url } from "inspector";
 import { Stack } from "@mui/material";
+import { Group } from "@material-ui/icons";
 const styles = makeStyles(
   (theme) => ({
     root: {
       backdropFilter: "blur(5px)",
     },
     container: {
-      height: 400,
+      height: 450,
       borderRadius: 0,
       padding: theme.spacing(0),
       overflow: "hidden",
@@ -38,18 +39,18 @@ const styles = makeStyles(
       justifyContent: "center",
       height: 215,
       marginTop: 20,
-      // borderBottomRightRadius: "80%",
+      borderBottomRightRadius: "80%",
     },
     top_container1: {
       backgroundColor: "#ffffff",
-      // padding: theme.spacing(1),
+      padding: theme.spacing(1),
       display: "flex",
-      // flexDirection: "column",
+      //flexDirection: "column",
       alignItems: "center",
       // justifyContent: "center",
       height: 50,
 
-      // borderBottomRightRadius: "80%",
+      //borderBottomRightRadius: "80%",
     },
     info_container: {
       padding: theme.spacing(0),
@@ -64,7 +65,7 @@ const styles = makeStyles(
       alignItems: "center",
       justifyContent: "space-between",
       padding: theme.spacing(2),
-      width: 250,
+      width: "100%",
       height: 150,
     },
     info_right: {
@@ -137,8 +138,8 @@ const styles = makeStyles(
       overflow: "hidden",
     },
     grid_item: {
-      width: 300,
-      height: 400,
+      width: 350,
+      height: 450,
       borderRadius: 0,
       padding: theme.spacing(0),
       overflow: "hidden",
@@ -164,6 +165,7 @@ export default function MemberCard({ info }: Props) {
     }
     return name;
   }
+
   return (
     <Grid component={Paper} item className={classes.grid_item}>
       <Paper ref={paperRef} className={classes.container}>
@@ -175,11 +177,11 @@ export default function MemberCard({ info }: Props) {
               width: "100%",
               justifyContent: "center",
               alignItems: "center",
-              height: "80%",
+              height: "100%",
             }}
           >
             <img
-              src={resources.gaaeLogo}
+              src={resources.uenrlogo}
               alt="logo"
               style={{
                 height: "120%",
@@ -189,20 +191,20 @@ export default function MemberCard({ info }: Props) {
             <Typography
               variant="body1"
               style={{
-                fontSize: 12,
+                fontSize: 18,
                 fontWeight: "bolder",
-                color: "#1B5E20",
+                color: "#650505",
                 textTransform: "uppercase",
               }}
             >
-              Ghana Association of Agricultural Economists - GAAE
+              university of energy and natural resources
             </Typography>
           </Stack>
         </Box>
         <Box
           className={classes.top_container}
           style={{
-            backgroundImage: `url(${resources.gaaftarg})`,
+            backgroundImage: `url(${resources.tagbg})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -246,9 +248,23 @@ export default function MemberCard({ info }: Props) {
               <Typography
                 style={{
                   marginBottom: 10,
-                  fontSize: 18,
+                  fontSize: 15,
                   fontWeight: "bolder",
-                  color: "#1B5E20",
+                  //color: "#650505",
+                  textTransform: "uppercase",
+                  paddingTop: 4,
+                }}
+              >
+                {info?.organization.indexOf("UENR") !== -1
+                  ? "University of energy and natural resources"
+                  : info.organization}
+              </Typography>
+              <Typography
+                style={{
+                  marginBottom: 10,
+                  fontSize: 20,
+                  fontWeight: "bolder",
+                  color: "#650505",
                   textTransform: "uppercase",
                 }}
               >

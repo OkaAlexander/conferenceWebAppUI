@@ -197,7 +197,7 @@ export default function LandingPage() {
     <Box
       className={classes.root}
       style={{
-        backgroundImage: `linear-gradient(180deg,rgba(255,255,255,0.4),rgba(255,255,255,0.6),rgba(255,255,255,0.8)),url(${resources.Bg3})`,
+        backgroundImage: `linear-gradient(180deg,rgba(255,255,255,0.4),rgba(255,255,255,0.6),rgba(255,255,255,0.8)),url(${resources.diaglogbg4})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -328,7 +328,7 @@ export default function LandingPage() {
             style={{ background: "steelblue" }}
             onClick={() => navigation("/uenr-conference/member/login")}
           >
-            Sign In
+            Login
           </Button>
         </Box>
       </Container>

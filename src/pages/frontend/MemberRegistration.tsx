@@ -222,7 +222,7 @@ export default function MemberRegistration() {
                 change={(e) =>
                   setForm({ ...form, name: e.target.value.toUpperCase() })
                 }
-                label="Name"
+                label="Name (include title)"
                 required
               />
               <Input
@@ -363,7 +363,7 @@ export default function MemberRegistration() {
                 </TextField>
               </Box>
 
-              {
+              {/* {
                 <Box
                   style={{
                     display: "flex",
@@ -412,7 +412,7 @@ export default function MemberRegistration() {
                     </Typography>
                   </Button>
                 </Box>
-              }
+              } */}
 
               <Box className={classes.form_container}>
                 <Box style={{ justifyContent: "flex-start" }}>

@@ -133,11 +133,11 @@ export default function CertificationPage() {
         innerRef={certRef}
         className={classes.container}
       >
-        {/* <Box className={classes.top_deco}>
+        <Box className={classes.top_deco}>
           <TopDeco />
           <TopDeco h={70} w={110} />
           <TopDeco h={80} w={120} />
-        </Box> */}
+        </Box>
         <Box style={{ flex: 1 }}>
           <Box className={classes.row_container} style={{ marginTop: "2.8%" }}>
             <Typography

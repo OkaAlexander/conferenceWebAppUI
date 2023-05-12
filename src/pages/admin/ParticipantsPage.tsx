@@ -129,6 +129,9 @@ export default function ParticipantsPage() {
         break;
       case "cert":
         navigation("certificate/" + info?.id);
+        break;
+      default:
+        console.log("I don't know what this is");
     }
   }
 

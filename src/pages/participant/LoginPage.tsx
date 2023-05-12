@@ -31,7 +31,7 @@ const styles = makeStyles(
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      background: `linear-gradient(0deg,rgba(0,0,0,0.65),rgba(0,0,0,0.35),rgba(0,0,0,0.75)),url(${resources.Meeting})`,
+      background: `linear-gradient(0deg,rgba(0,0,0,0.65),rgba(0,0,0,0.35),rgba(0,0,0,0.75)),url(${resources.dialogbg6})`,
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       backgroundAttachment: "fixed",

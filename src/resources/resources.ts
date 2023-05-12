@@ -24,6 +24,13 @@ import uenrmainLogo from "../assets/uenrmainlogo.png";
 import gaaeLogo from "../assets/gaae_logo.png";
 import knustLogo from "../assets/knust_logo.png";
 import gaaebg from "../assets/gaaetargbg.png";
+import dialogbg1 from "../assets/dialogbg1.jpg";
+import dialogbg2 from "../assets/dialogbg2.jpg";
+import diaglogbg3 from "../assets/dialogbg3.jpg";
+import diaglogbg4 from "../assets/dialogbg4.jpg";
+import diaglogbg5 from "../assets/dialogbg5.jpg";
+import dialogbg6 from "../assets/dialogbg6.jpg";
+import tagbg from "../assets/tagbg.jpg";
 export const resources = {
   Meeting,
   Logo,
@@ -51,4 +58,11 @@ export const resources = {
   gaaeLogo,
   knustLogo,
   gaaebg,
+  dialogbg1,
+  dialogbg2,
+  diaglogbg3,
+  diaglogbg4,
+  diaglogbg5,
+  dialogbg6,
+  tagbg,
 };

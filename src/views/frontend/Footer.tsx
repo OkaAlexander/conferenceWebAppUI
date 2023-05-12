@@ -60,7 +60,7 @@ export default function Footer() {
             variant="body2"
             component="caption"
           >
-            0208155177 || 0241011388 ||0242238238.
+            0543311515 || 0543920634 ||0553215783.
           </Typography>
           <Typography
             style={{ color: "#fff" }}
