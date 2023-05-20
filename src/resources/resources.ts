@@ -31,6 +31,7 @@ import diaglogbg4 from "../assets/dialogbg4.jpg";
 import diaglogbg5 from "../assets/dialogbg5.jpg";
 import dialogbg6 from "../assets/dialogbg6.jpg";
 import tagbg from "../assets/tagbg.jpg";
+import greenafm from "../assets/greena.jpg";
 export const resources = {
   Meeting,
   Logo,
@@ -65,4 +66,5 @@ export const resources = {
   diaglogbg5,
   dialogbg6,
   tagbg,
+  greenafm,
 };

@@ -39,7 +39,7 @@ const styles = makeStyles(
       justifyContent: "center",
       height: 215,
       marginTop: 20,
-      borderBottomRightRadius: "80%",
+      borderBottomRightRadius: "70%",
     },
     top_container1: {
       backgroundColor: "#ffffff",
@@ -268,7 +268,8 @@ export default function MemberCard({ info }: Props) {
                   textTransform: "uppercase",
                 }}
               >
-                Participant
+                PARTICIPANT
+                <label style={{ fontSize: "11px", color: "#000" }}>_2023</label>
               </Typography>
             </Box>
           </Box>

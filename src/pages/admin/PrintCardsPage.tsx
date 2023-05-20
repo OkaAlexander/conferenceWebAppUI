@@ -71,7 +71,7 @@ const styles = makeStyles(
       padding: theme.spacing(1),
       height: "inherit",
       alignItems: "center",
-      justifyContent: "center",
+      justifyContent: "space-between", // to remove space between the cards, use justifyContent:"center"
       display: "flex",
     },
   }),
